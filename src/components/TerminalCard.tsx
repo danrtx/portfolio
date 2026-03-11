@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/AppContext';
-import { translations } from '../data/translations';
 
 // ─── Terminal lines by language ───────────────────────────────────────────────
 const LINES = {

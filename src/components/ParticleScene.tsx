@@ -11,7 +11,7 @@ function Particles() {
 
   // Create per-particle data
   const particles = useRef(
-    Array.from({ length: COUNT }, (_, i) => ({
+    Array.from({ length: COUNT }, (_, _i) => ({
       semiMajor: 2 + Math.random() * 8,
       semiMinor: 1 + Math.random() * 5,
       inclination: Math.random() * Math.PI,
