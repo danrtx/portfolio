@@ -6,16 +6,15 @@ interface Section {
   label: string;
   labelEs: string;
   icon: string;
-  path?: string;
 }
 
 const SECTIONS: Section[] = [
-  { id: 'home',       label: 'Home',         labelEs: 'Inicio',      icon: '🏠', path: '/' },
-  { id: 'about',      label: 'About Me',     labelEs: 'Sobre mí',    icon: '👤', path: '/about' },
-  { id: 'work',       label: 'Work',         labelEs: 'Proyectos',   icon: '💼', path: '/work' },
+  { id: 'home',       label: 'Home',         labelEs: 'Inicio',      icon: '🏠' },
+  { id: 'about',      label: 'About Me',     labelEs: 'Sobre mí',    icon: '👤' },
+  { id: 'work',       label: 'Work',         labelEs: 'Proyectos',   icon: '💼' },
   { id: 'experience', label: 'Experience',   labelEs: 'Experiencia', icon: '🚀' },
   { id: 'education',  label: 'Education',    labelEs: 'Educación',   icon: '🎓' },
-  { id: 'contact',    label: 'Contact',      labelEs: 'Contacto',    icon: '✉️', path: '/contact' },
+  { id: 'contact',    label: 'Contact',      labelEs: 'Contacto',    icon: '✉️' },
 ];
 
 interface Props {
@@ -81,10 +80,10 @@ export function CommandPalette({ lang }: Props) {
 
   const handleSelect = (section: Section) => {
     setOpen(false);
-    if (section.path) {
-      window.location.href = section.path;
+    // Always scroll — never use URL navigation on a single-page app
+    if (section.id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Scroll to section ID
       const el = document.getElementById(section.id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

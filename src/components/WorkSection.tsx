@@ -56,17 +56,19 @@ function ProjectDetailView({
   const hasNext = projectIndex < allProjects.length - 1;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg)', paddingBottom: 120 }}>
-      {/* Hero image — full width */}
-      <div style={{ position: 'relative', height: 'clamp(280px, 45vh, 480px)', overflow: 'hidden' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'var(--bg)', overflowY: 'auto' }}>
+      {/* Hero image — full width, starts at top:0, floats under navbar */}
+      <div style={{ position: 'relative', height: 'clamp(320px, 52vh, 540px)', overflow: 'hidden', marginTop: 0 }}>
         <img src={project.image} alt={project.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        {/* Gradient overlays — var(--bg) ensures they match current theme */}
+        {/* Top fade — darkens under navbar so glass text stays readable */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120, background: 'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, transparent 100%)', zIndex: 1, pointerEvents: 'none' }} />
+        {/* Bottom + left overlays — fade to theme bg */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg) 0%, transparent 55%)' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.35) 0%, transparent 65%)' }} />
 
-        {/* Title + badges over image */}
-        <div style={{ position: 'absolute', bottom: 40, left: '6vw', right: '6vw' }}>
+        {/* Title + badges — paddingTop keeps content below navbar (~70px) + breathing room */}
+        <div style={{ position: 'absolute', bottom: 40, left: '6vw', right: '6vw', paddingTop: 90 }}>
           <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
             <span className="glass-chip" style={{ fontSize: '0.65rem' }}>{project.year}</span>
             <span className="glass-chip" style={{ fontSize: '0.65rem', color: '#4F8EF7', borderColor: 'rgba(79,142,247,0.4)' }}>
@@ -292,6 +294,8 @@ export function WorkSection() {
             variants={slideVariants} initial="enter" animate="center" exit="exit"
             transition={{ type: 'spring', stiffness: 260, damping: 28 }}>
             <section className="py-24 px-6 max-w-6xl mx-auto">
+              {view === 'grid' && (
+                <>
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="mb-4" style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
                 {tr.work_label}
@@ -301,6 +305,8 @@ export function WorkSection() {
                 style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
                 {tr.work_heading_1}{' '}<span className="gradient-text">{tr.work_heading_accent}</span>
               </motion.h2>
+                </>
+              )}
 
               {/* Project cards — centered 2-column grid, max width so cards don't stretch */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24, maxWidth: 820, margin: '0 auto' }}>

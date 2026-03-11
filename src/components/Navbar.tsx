@@ -44,8 +44,8 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className="fixed z-50 flex items-center justify-center"
-      style={{ top: '20px', left: '50%', translateX: '-50%' }}
+      className="fixed flex items-center justify-center"
+      style={{ top: '20px', left: '50%', translateX: '-50%', zIndex: 100 }}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.2 }}
