@@ -44,7 +44,7 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className="fixed flex items-center justify-center"
+      className="desktop-navbar hidden md:flex fixed items-center justify-center"
       style={{ top: '20px', left: '50%', translateX: '-50%', zIndex: 100 }}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

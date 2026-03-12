@@ -6,6 +6,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SettingsButton } from './components/SettingsButton';
 import { CommandPalette } from './components/CommandPalette';
+import { MobileNav } from './components/MobileNav';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Work } from './pages/Work';
@@ -38,6 +39,7 @@ function AppShell() {
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
+      <MobileNav />
       <SettingsButton />
       <CommandPalette lang={lang} />
       <main>

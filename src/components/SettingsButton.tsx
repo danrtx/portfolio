@@ -125,7 +125,7 @@ export function SettingsButton() {
   const dividerColor = isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.08)';
 
   return (
-    <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 9999 }}>
+    <div className="fixed right-4 md:right-6 bottom-[100px] md:bottom-6 z-[9999]">
       <AnimatePresence>
         {open && (
           <motion.div
