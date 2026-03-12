@@ -59,8 +59,9 @@ export function MobileNav() {
       zIndex: 100,
       display: 'flex',
       alignItems: 'flex-end',
-      height: '56px',
-      padding: '0 8px',
+      height: '60px',
+      padding: '0 12px',
+      overflow: 'visible',
       background: isLight ? 'rgba(255,255,255,0.85)' : 'rgba(15,15,25,0.85)',
       backdropFilter: 'blur(24px)',
       WebkitBackdropFilter: 'blur(24px)',
@@ -78,31 +79,36 @@ export function MobileNav() {
             alignItems: 'center',
             justifyContent: 'flex-end',
             height: '100%',
-            padding: '0 14px 10px',
+            padding: '0 12px 8px',
+            overflow: 'visible',
             background: 'none',
             border: 'none',
             cursor: 'none',
           }}
         >
           {/* Active item: circle pops ABOVE the bar */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {activeSection === item.id && (
               <motion.div
                 key={`bubble-${item.id}`}
-                initial={{ opacity: 0, scale: 0.6, y: 0 }}
-                animate={{ opacity: 1, scale: 1, y: -16 }}
-                exit={{ opacity: 0, scale: 0.6, y: 0 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 500,
-                  damping: 35,
-                  duration: 0.25
+                initial={{ opacity: 0, scale: 0.5, y: 8 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  y: -10,
+                  transition: { type: 'spring', stiffness: 500, damping: 35 }
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  scale: 0.5, 
+                  y: 8,
+                  transition: { duration: 0.12 }
                 }}
                 style={{
                   position: 'absolute',
-                  bottom: '6px',
-                  width: '52px',
-                  height: '52px',
+                  bottom: '8px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
                   background: isLight ? '#0A0A14' : '#ffffff',
                   display: 'flex',
