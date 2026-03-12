@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Briefcase, Mail } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
@@ -85,54 +85,73 @@ export function MobileNav() {
           }}
         >
           {/* Active item: circle pops ABOVE the bar */}
-          {activeSection === item.id && (
-            <motion.div
-              layoutId="mobile-active"
-              transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-              style={{
-                position: 'absolute',
-                bottom: '6px',
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
-                background: isLight ? '#0A0A14' : '#ffffff',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: isLight ? '0 -6px 20px rgba(0,0,0,0.15)' : '0 -6px 20px rgba(0,0,0,0.25)',
-                transform: 'translateY(-16px)',  // pops UP above bar
-              }}
-            >
-              <item.Icon size={18} color={isLight ? '#ffffff' : '#0A0A14'} />
-              <span style={{
-                fontFamily: 'DM Sans, sans-serif',
-                fontSize: '9px',
-                fontWeight: 600,
-                color: isLight ? '#ffffff' : '#0A0A14',
-                marginTop: '2px',
-                textTransform: 'capitalize'
-              }}>
-                {item.label}
-              </span>
-            </motion.div>
-          )}
+          <AnimatePresence mode="wait">
+            {activeSection === item.id && (
+              <motion.div
+                key={`bubble-${item.id}`}
+                initial={{ opacity: 0, scale: 0.6, y: 0 }}
+                animate={{ opacity: 1, scale: 1, y: -16 }}
+                exit={{ opacity: 0, scale: 0.6, y: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 500,
+                  damping: 35,
+                  duration: 0.25
+                }}
+                style={{
+                  position: 'absolute',
+                  bottom: '6px',
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '50%',
+                  background: isLight ? '#0A0A14' : '#ffffff',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: isLight ? '0 -6px 20px rgba(0,0,0,0.15)' : '0 -6px 20px rgba(0,0,0,0.25)',
+                }}
+              >
+                <item.Icon size={18} color={isLight ? '#ffffff' : '#0A0A14'} />
+                <span style={{
+                  fontFamily: 'DM Sans, sans-serif',
+                  fontSize: '9px',
+                  fontWeight: 600,
+                  color: isLight ? '#ffffff' : '#0A0A14',
+                  marginTop: '2px',
+                  textTransform: 'capitalize'
+                }}>
+                  {item.label}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* Inactive: just icon + label inside bar */}
-          {activeSection !== item.id && (
-            <>
-              <item.Icon size={18} color={isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.45)'} />
-              <span style={{
-                fontFamily: 'DM Sans, sans-serif',
-                fontSize: '9px',
-                color: isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.35)',
-                marginTop: '1px',
-                textTransform: 'capitalize'
-              }}>
-                {item.label}
-              </span>
-            </>
-          )}
+          {/* Inactive icon — always visible, scales/fades out when active */}
+          <motion.div
+            animate={{
+              opacity: activeSection === item.id ? 0 : 1,
+              scale: activeSection === item.id ? 0.8 : 1
+            }}
+            transition={{ duration: 0.2 }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: '2px' // slight visual adjustment for alignment
+            }}
+          >
+            <item.Icon size={18} color={isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.45)'} />
+            <span style={{
+              fontFamily: 'DM Sans, sans-serif',
+              fontSize: '9px',
+              color: isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.35)',
+              marginTop: '1px',
+              textTransform: 'capitalize'
+            }}>
+              {item.label}
+            </span>
+          </motion.div>
         </button>
       ))}
     </nav>
