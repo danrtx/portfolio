@@ -70,7 +70,7 @@ function ProjectDetailView({
   };
 
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'var(--bg)', overflowY: 'auto' }}>
+    <>
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={project.id}
@@ -209,7 +209,7 @@ function ProjectDetailView({
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -354,9 +354,8 @@ export function WorkSection() {
           </motion.div>
         ) : (
           <motion.div key="detail"
-            custom={direction}
-            variants={slideVariants} initial="enter" animate="center" exit="exit"
-            transition={{ type: 'spring', stiffness: 260, damping: 28 }}>
+            initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'var(--bg)', overflowY: 'auto' }}>
             <ProjectDetailView
               project={allProjects[selectedIdx]}
               projectIndex={selectedIdx}
