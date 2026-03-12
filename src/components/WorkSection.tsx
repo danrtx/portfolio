@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { projects } from '../data/projects';
 import { Project } from '../types';
@@ -44,9 +44,9 @@ const slideVariants = {
 };
 
 function ProjectDetailView({
-  project, projectIndex, onBack, onNavigate, lang,
+  project, projectIndex, direction, onBack, onNavigate, lang,
 }: {
-  project: Project; projectIndex: number;
+  project: Project; projectIndex: number; direction: number;
   onBack: () => void; onNavigate: (dir: number) => void;
   lang: 'en' | 'es';
 }) {
@@ -55,9 +55,33 @@ function ProjectDetailView({
   const hasPrev = projectIndex > 0;
   const hasNext = projectIndex < allProjects.length - 1;
 
+  // Lock body scroll while detail view is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  const innerVariants = {
+    enter: (dir: number) => ({ x: dir > 0 ? '50%' : '-50%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? '-50%' : '50%', opacity: 0 }),
+  };
+
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'var(--bg)', overflowY: 'auto' }}>
-      {/* Hero image — full width, starts at top:0, floats under navbar */}
+      <AnimatePresence mode="wait" custom={direction}>
+        <motion.div
+          key={project.id}
+          custom={direction}
+          variants={innerVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.4 }}
+        >
+          {/* Hero image — full width, starts at top:0, floats under navbar */}
       <div style={{ position: 'relative', height: 'clamp(320px, 52vh, 540px)', overflow: 'hidden', marginTop: 0 }}>
         <img src={project.image} alt={project.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -151,6 +175,8 @@ function ProjectDetailView({
           </div>
         </div>
       </div>
+      </motion.div>
+      </AnimatePresence>
 
       {/* ── Fixed bottom navigation — fully theme-aware ─────────────── */}
       <div style={{
@@ -327,13 +353,14 @@ export function WorkSection() {
             </section>
           </motion.div>
         ) : (
-          <motion.div key={`detail-${selectedIdx}`}
+          <motion.div key="detail"
             custom={direction}
             variants={slideVariants} initial="enter" animate="center" exit="exit"
             transition={{ type: 'spring', stiffness: 260, damping: 28 }}>
             <ProjectDetailView
               project={allProjects[selectedIdx]}
               projectIndex={selectedIdx}
+              direction={direction}
               onBack={goBack}
               onNavigate={navigate}
               lang={lang}
