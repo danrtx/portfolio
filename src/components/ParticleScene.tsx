@@ -95,8 +95,13 @@ export function ParticleScene() {
   return (
     <Canvas
       camera={{ position: [0, 0, 14], fov: 60 }}
-      onCreated={({ gl }) => {
+      onCreated={({ gl, scene }) => {
         const canvas = gl.domElement;
+        
+        // Ensure renderer background is entirely transparent so CSS gradient shows
+        gl.setClearColor(0x000000, 0);
+        scene.background = null;
+
         canvas.addEventListener('webglcontextlost', (e) => {
           e.preventDefault();
         }, false);
