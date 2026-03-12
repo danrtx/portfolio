@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import { socialLinks } from '../data/projects';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
@@ -81,16 +80,36 @@ export function ContactSection() {
     e.preventDefault();
     setStatus('sending');
 
+    // TEMPORARY DEBUG — remove after fixing
+    console.log('Service ID:', import.meta.env.VITE_EMAILJS_SERVICE_ID);
+    console.log('Template ID:', import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+    console.log('Public Key:', import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID  as string,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
-        { from_name: form.name, from_email: form.email, message: form.message },
-        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string },
-      );
-      setStatus('success');
-      setForm({ name: '', email: '', message: '' });
-      showToast(lang === 'es' ? '¡Mensaje enviado! Te respondo en menos de 24h ✓' : "Message sent! I'll reply within 24h ✓", 'success');
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          template_id: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          user_id: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+          template_params: {
+            from_name: form.name,
+            from_email: form.email,
+            message: form.message,
+          }
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setForm({ name: '', email: '', message: '' });
+        showToast(lang === 'es' ? '¡Mensaje enviado! Te respondo en menos de 24h ✓' : "Message sent! I'll reply within 24h ✓", 'success');
+      } else {
+        throw new Error('EmailJS API Failed');
+      }
     } catch {
       setStatus('error');
       showToast(
