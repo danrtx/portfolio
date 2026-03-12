@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Briefcase, Mail } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
@@ -8,25 +8,32 @@ export function MobileNav() {
   const [activeSection, setActiveSection] = useState('home');
   const isLight = theme === 'light';
 
-  // Spy on scroll to update active section based on what's in view
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Use IntersectionObserver to update active section naturally
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'work', 'contact'];
-      let current = 'home';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.4) {
-            current = id;
-            break;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // SKIP observer updates while programmatic scroll is happening
+        if (isScrollingRef.current) return;
+        
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        }
-      }
-      setActiveSection(current);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const sections = ['home', 'about', 'work', 'contact'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const navItems = [
@@ -37,15 +44,28 @@ export function MobileNav() {
   ];
 
   const scrollTo = (id: string) => {
+    // 1. Set active IMMEDIATELY on click — don't wait for scroll observer
+    setActiveSection(id);
+    
+    // 2. Disable the scroll observer temporarily
+    isScrollingRef.current = true;
+    
+    // 3. Scroll to section
     if (id === 'home') {
-      window.scrollTo(0, 0);
-      return;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    
+    // 4. Re-enable observer after scroll animation finishes (~800ms)
+    clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 800);
   };
 
   if (window.innerWidth >= 768) return null;
