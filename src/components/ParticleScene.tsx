@@ -7,7 +7,8 @@ function Particles() {
   const { camera } = useThree();
   const mouseRef = useRef({ x: 0, y: 0 });
 
-  const COUNT = 100;
+  const isMobile = window.innerWidth < 768;
+  const COUNT = isMobile ? 40 : 100;
 
   // Create per-particle data
   const particles = useRef(
@@ -94,6 +95,15 @@ export function ParticleScene() {
   return (
     <Canvas
       camera={{ position: [0, 0, 14], fov: 60 }}
+      onCreated={({ gl }) => {
+        const canvas = gl.domElement;
+        canvas.addEventListener('webglcontextlost', (e) => {
+          e.preventDefault();
+        }, false);
+        canvas.addEventListener('webglcontextrestored', () => {
+          // Re-trigger render loop or re-init if explicitly needed
+        }, false);
+      }}
       style={{
         position: 'absolute',
         top: 0,

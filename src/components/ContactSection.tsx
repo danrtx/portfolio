@@ -162,19 +162,19 @@ export function ContactSection() {
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
+              <label htmlFor="from_name" style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
                 {tr.contact_name_label.toUpperCase()}
               </label>
-              <input type="text" required value={form.name}
+              <input id="from_name" name="from_name" type="text" required value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder={tr.contact_name_placeholder}
                 className="glass-input w-full px-4 py-3" style={{ fontSize: '0.9rem' }} />
             </div>
             <div>
-              <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
+              <label htmlFor="from_email" style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
                 {tr.contact_email_label.toUpperCase()}
               </label>
-              <input type="email" required value={form.email}
+              <input id="from_email" name="from_email" type="email" required value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder={tr.contact_email_placeholder}
                 className="glass-input w-full px-4 py-3" style={{ fontSize: '0.9rem' }} />
@@ -182,10 +182,10 @@ export function ContactSection() {
           </div>
 
           <div>
-            <label style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
+            <label htmlFor="message" style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.72rem', letterSpacing: '0.1em', marginBottom: 8 }}>
               {tr.contact_message_label.toUpperCase()}
             </label>
-            <textarea required rows={5} value={form.message}
+            <textarea id="message" name="message" required rows={5} value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               placeholder={tr.contact_message_placeholder}
               className="glass-input w-full px-4 py-3 resize-none" style={{ fontSize: '0.9rem' }} />
