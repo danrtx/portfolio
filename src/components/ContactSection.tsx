@@ -5,9 +5,6 @@ import { socialLinks } from '../data/projects';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
 
-const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  as string;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
-const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  as string;
 
 const SocialIcon = ({ name }: { name: string }) => {
   const icons: Record<string, string> = {
@@ -86,10 +83,10 @@ export function ContactSection() {
 
     try {
       await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
+        import.meta.env.VITE_EMAILJS_SERVICE_ID  as string,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
         { from_name: form.name, from_email: form.email, message: form.message },
-        { publicKey: PUBLIC_KEY },
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string },
       );
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
