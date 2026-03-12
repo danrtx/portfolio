@@ -9,7 +9,7 @@ export function MobileNav() {
   const isLight = theme === 'light';
 
   const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   // Use IntersectionObserver to update active section naturally
   useEffect(() => {
