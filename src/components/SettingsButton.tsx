@@ -93,20 +93,11 @@ function LangPill({ lang, setLang }: { lang: 'en' | 'es'; setLang: (l: 'en' | 'e
 export function SettingsButton() {
   const { theme, setTheme, lang, setLang } = useAppContext();
   const [open, setOpen] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
 
   const tr = translations[lang];
   const isLight = theme === 'light';
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Close on outside click
   useEffect(() => {
@@ -122,37 +113,6 @@ export function SettingsButton() {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [open]);
-
-  // Onboarding sequence
-  useEffect(() => {
-    // Double check localStorage on mount
-    const seen = localStorage.getItem('settings-onboarding');
-    
-    if (!seen) {
-      // Show pulse after 2 seconds
-      const pulseTimer = setTimeout(() => {
-        setShowOnboarding(true);
-      }, 2000);
-
-      // Show tooltip after 2.3 seconds
-      const tooltipTimer = setTimeout(() => {
-        setShowTooltip(true);
-      }, 2300);
-
-      // Hide everything after 5 seconds
-      const hideTimer = setTimeout(() => {
-        setShowOnboarding(false);
-        setShowTooltip(false);
-        localStorage.setItem('settings-onboarding', 'true');
-      }, 5000);
-
-      return () => {
-        clearTimeout(pulseTimer);
-        clearTimeout(tooltipTimer);
-        clearTimeout(hideTimer);
-      };
-    }
-  }, []);
 
   // Panel glass styles — flips with theme
   const panelBg = isLight
@@ -213,113 +173,6 @@ export function SettingsButton() {
                 {tr.settings_language}
               </span>
               <LangPill lang={lang} setLang={setLang} />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Onboarding Animation */}
-      {/* Pulse rings — independent from tooltip */}
-      {showOnboarding && !open && (
-        <>
-          <motion.div
-            initial={{ scale: 1, opacity: 0.6 }}
-            animate={{ scale: 2.8, opacity: 0 }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut' }}
-            style={{
-              position: 'fixed',
-              bottom: isMobile ? '100px' : '24px',
-              right: isMobile ? '16px' : '24px',
-              width: '44px',
-              height: '44px',
-              borderRadius: '50%',
-              border: '2px solid #4F8EF7',
-              zIndex: 9998,
-              pointerEvents: 'none',
-            }}
-          />
-          <motion.div
-            initial={{ scale: 1, opacity: 0.3 }}
-            animate={{ scale: 2.0, opacity: 0 }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut', delay: 0.3 }}
-            style={{
-              position: 'fixed',
-              bottom: isMobile ? '100px' : '24px',
-              right: isMobile ? '16px' : '24px',
-              width: '44px',
-              height: '44px',
-              borderRadius: '50%',
-              border: '2px solid #A78BFA',
-              zIndex: 9998,
-              pointerEvents: 'none',
-            }}
-          />
-        </>
-      )}
-
-      {/* Tooltip bubble */}
-      <AnimatePresence>
-        {showTooltip && !open && (
-          <motion.div
-            initial={{ opacity: 0, x: isMobile ? 0 : 10, y: isMobile ? 10 : 0, scale: 0.85 }}
-            animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-            exit={{ opacity: 0, x: isMobile ? 0 : 10, y: isMobile ? 10 : 0, scale: 0.85 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            style={{
-              position: 'fixed',
-              bottom: isMobile ? '160px' : '28px',
-              right: isMobile ? '16px' : '82px',
-              zIndex: 9999,
-              background: isLight ? 'rgba(255,255,255,0.95)' : 'rgba(15,15,25,0.95)',
-              backdropFilter: 'blur(16px)',
-              border: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.15)',
-              borderRadius: '14px',
-              padding: '12px 16px',
-              pointerEvents: 'none',
-              whiteSpace: 'nowrap',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            {/* Arrow */}
-            <div style={{
-              position: 'absolute',
-              ...(isMobile ? {
-                bottom: '-6px',
-                right: '11px', 
-                borderBottom: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.15)',
-                borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.15)',
-              } : {
-                right: '-5px',
-                top: '50%',
-                marginTop: '-5px', 
-                borderTop: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.15)',
-                borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.15)',
-              }),
-              width: '10px',
-              height: '10px',
-              background: isLight ? 'rgba(255,255,255,0.95)' : 'rgba(15,15,25,0.95)',
-              transform: 'rotate(45deg)',
-            }} />
-
-            <span style={{ fontSize: '18px' }}>⚙️</span>
-            <div>
-              <div style={{
-                color: isLight ? '#0A0A14' : '#F0F4FF',
-                fontSize: '13px',
-                fontWeight: 700,
-                marginBottom: '3px',
-              }}>
-                {tr.settings_theme} & {tr.settings_language}
-              </div>
-              <div style={{
-                color: isLight ? 'rgba(10,10,20,0.55)' : 'rgba(240,244,255,0.55)',
-                fontSize: '11px',
-              }}>
-                 Switch dark/light · EN / ES
-              </div>
             </div>
           </motion.div>
         )}
