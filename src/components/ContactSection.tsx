@@ -46,16 +46,19 @@ function ChannelCard({ icon, label, handle, href, accent }: { icon: React.ReactN
   return (
     <motion.a href={href} target={href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
       className="glass-card p-4 flex items-center gap-4 flex-1"
-      style={{ textDecoration: 'none', cursor: 'none', minWidth: 160 }}
+      style={{ textDecoration: 'none', cursor: 'none', overflow: 'hidden', minWidth: 0, width: '100%' }}
       whileHover={{ y: -4, boxShadow: `0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px ${accent}30` }}
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 350, damping: 25 }}>
       <div style={{ width: 38, height: 38, borderRadius: 10, background: `${accent}18`, border: `1px solid ${accent}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: accent, flexShrink: 0 }}>
         {icon}
       </div>
-      <div>
+      <div style={{ overflow: 'hidden', minWidth: 0, flex: 1 }}>
         <div style={{ fontFamily: 'DM Sans', fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: 2, letterSpacing: '0.05em' }}>{label}</div>
-        <div style={{ fontFamily: 'DM Sans', fontSize: '0.8rem', color: 'var(--text-primary)', fontWeight: 600 }}>{handle}</div>
+        <div style={{
+          fontFamily: 'DM Sans', color: 'var(--text-primary)', fontWeight: 600,
+          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', display: 'block', fontSize: 'clamp(11px, 3vw, 14px)'
+        }}>{handle}</div>
       </div>
     </motion.a>
   );
