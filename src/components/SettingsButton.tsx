@@ -99,6 +99,13 @@ export function SettingsButton() {
 
   const tr = translations[lang];
   const isLight = theme === 'light';
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Close on outside click
   useEffect(() => {
@@ -117,20 +124,24 @@ export function SettingsButton() {
 
   // Onboarding sequence
   useEffect(() => {
-    const hasSeenOnboarding = localStorage.getItem('settings-onboarding');
-    if (hasSeenOnboarding) return;
-    
-    // Play animation after page loads
+    // Use setTimeout to ensure this runs after full page load
     const timer = setTimeout(() => {
-      setShowOnboarding(true);
-      
-      // Hide after 3 seconds
-      setTimeout(() => {
-        setShowOnboarding(false);
-        localStorage.setItem('settings-onboarding', 'true');
-      }, 3000);
+      try {
+        const seen = localStorage.getItem('settings-onboarding');
+        if (!seen) {
+          setShowOnboarding(true);
+          setTimeout(() => {
+            setShowOnboarding(false);
+            localStorage.setItem('settings-onboarding', 'true');
+          }, 3000);
+        }
+      } catch (e) {
+        // localStorage might be blocked in some browsers
+        setShowOnboarding(true);
+        setTimeout(() => setShowOnboarding(false), 3000);
+      }
     }, 1500);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -202,35 +213,35 @@ export function SettingsButton() {
       <AnimatePresence>
         {showOnboarding && !open && (
           <>
-            {/* Expanding pulse rings */}
+            {/* Pulse ring */}
             <motion.div
               initial={{ scale: 1, opacity: 0.8 }}
               animate={{ scale: 2.5, opacity: 0 }}
               transition={{ duration: 1, repeat: 2, ease: 'easeOut' }}
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
+                position: 'fixed',
+                bottom: isMobile ? '100px' : '24px', // Matches exactly with the main button position
+                right: isMobile ? '16px' : '24px',
+                width: '44px',
+                height: '44px',
                 borderRadius: '50%',
                 border: '2px solid #4F8EF7',
+                zIndex: 99,
                 pointerEvents: 'none',
               }}
             />
 
-            {/* Desktop Tooltip bubble (left of gear) */}
+            {/* Tooltip */}
             <motion.div
-              initial={{ opacity: 0, x: 10, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: 10, scale: 0.9 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 10, y: isMobile ? 10 : 0, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: isMobile ? 0 : 10, y: isMobile ? 10 : 0, scale: 0.9 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              className="hidden md:flex"
               style={{
-                position: 'absolute',
-                top: '50%',
-                right: 'calc(100% + 16px)',
-                marginTop: '-21px', // half of height roughly
+                position: 'fixed',
+                bottom: isMobile ? '160px' : '30px', // Above button on mobile, inline on desktop
+                right: isMobile ? '16px' : '86px',   // Inline right margin on desktop
+                zIndex: 9999,
                 background: isLight ? 'rgba(255,255,255,0.92)' : 'rgba(15,15,25,0.92)',
                 backdropFilter: 'blur(16px)',
                 border: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
@@ -238,76 +249,30 @@ export function SettingsButton() {
                 padding: '10px 14px',
                 pointerEvents: 'none',
                 whiteSpace: 'nowrap',
+                display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
               }}
             >
-              {/* Arrow pointing right toward gear */}
+              {/* Arrow */}
               <div style={{
                 position: 'absolute',
-                right: '-6px',
-                top: '50%',
-                marginTop: '-5px',
+                ...(isMobile ? {
+                  bottom: '-6px',
+                  right: '10px', // Point down exactly at gear icon center
+                  borderBottom: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
+                  borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
+                } : {
+                  right: '-6px',
+                  top: '50%',
+                  marginTop: '-5px', // Point right at gear icon center
+                  borderTop: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
+                  borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
+                }),
                 width: '10px',
                 height: '10px',
                 background: isLight ? 'rgba(255,255,255,0.92)' : 'rgba(15,15,25,0.92)',
-                borderTop: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
-                borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
-                rotate: '45deg',
-              }} />
-
-              <span style={{ fontSize: '16px' }}>⚙️</span>
-              <div>
-                <div style={{
-                  color: isLight ? '#0A0A14' : '#F0F4FF',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  marginBottom: '2px',
-                }}>
-                  Theme & Language
-                </div>
-                <div style={{
-                  color: isLight ? 'rgba(10,10,20,0.5)' : 'rgba(240,244,255,0.5)',
-                  fontSize: '11px',
-                }}>
-                  Switch dark/light · EN/ES
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Mobile Tooltip bubble (above gear) */}
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.9 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              className="flex md:hidden"
-              style={{
-                position: 'absolute',
-                bottom: 'calc(100% + 16px)',
-                right: 0,
-                background: isLight ? 'rgba(255,255,255,0.92)' : 'rgba(15,15,25,0.92)',
-                backdropFilter: 'blur(16px)',
-                border: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
-                borderRadius: '12px',
-                padding: '10px 14px',
-                pointerEvents: 'none',
-                whiteSpace: 'nowrap',
-                alignItems: 'center',
-                gap: '8px',
-              }}
-            >
-              {/* Arrow pointing down toward gear */}
-              <div style={{
-                position: 'absolute',
-                bottom: '-6px',
-                right: '16px',
-                width: '10px',
-                height: '10px',
-                background: isLight ? 'rgba(255,255,255,0.92)' : 'rgba(15,15,25,0.92)',
-                borderBottom: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
-                borderRight: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.14)',
-                rotate: '45deg',
+                transform: isMobile ? 'rotate(45deg)' : 'rotate(45deg)',
               }} />
 
               <span style={{ fontSize: '16px' }}>⚙️</span>
