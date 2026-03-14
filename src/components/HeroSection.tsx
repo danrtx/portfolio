@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { ParticleScene } from './ParticleScene';
 import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
@@ -47,6 +46,13 @@ export function HeroSection() {
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     setMousePos({ x: (e.clientX / window.innerWidth - 0.5) * 20, y: (e.clientY / window.innerHeight - 0.5) * 10 });
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section
@@ -106,22 +112,20 @@ export function HeroSection() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, type: 'spring', stiffness: 200 }}
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          <Link to="/work">
-            <motion.button className="glass-btn px-8 py-3"
-              style={{ fontFamily: 'DM Sans, sans-serif', color: '#F0F4FF', fontSize: '0.9rem', background: 'rgba(79,142,247,0.15)', border: '1px solid rgba(79,142,247,0.4)' }}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(79,142,247,0.3)' }} whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
-              {tr.hero_cta_work}
-            </motion.button>
-          </Link>
-          <Link to="/contact">
-            <motion.button className="glass-btn px-8 py-3"
-              style={{ fontFamily: 'DM Sans, sans-serif', color: 'rgba(240,244,255,0.7)', fontSize: '0.9rem' }}
-              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
-              {tr.hero_cta_contact}
-            </motion.button>
-          </Link>
+          <motion.button className="glass-btn px-8 py-3"
+            onClick={() => scrollToSection('work')}
+            style={{ fontFamily: 'DM Sans, sans-serif', color: '#F0F4FF', fontSize: '0.9rem', background: 'rgba(79,142,247,0.15)', border: '1px solid rgba(79,142,247,0.4)', cursor: 'pointer' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(79,142,247,0.3)' }} whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
+            {tr.hero_cta_work}
+          </motion.button>
+          <motion.button className="glass-btn px-8 py-3"
+            onClick={() => scrollToSection('contact')}
+            style={{ fontFamily: 'DM Sans, sans-serif', color: 'rgba(240,244,255,0.7)', fontSize: '0.9rem', cursor: 'pointer' }}
+            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
+            {tr.hero_cta_contact}
+          </motion.button>
         </motion.div>
       </div>
 

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
+
 import { skills, personal } from '../data/projects';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
@@ -23,6 +23,13 @@ function ProfileCard() {
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-0.5, 0.5], [7, -7]);
   const rotateY = useTransform(x, [-0.5, 0.5], [-7, 7]);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current?.getBoundingClientRect();
@@ -107,17 +114,16 @@ function ProfileCard() {
 
         {/* CTA buttons */}
         <div className="flex items-center gap-3">
-          <Link to="/contact" className="flex-1">
-            <motion.button
-              className="w-full glass-btn py-3 flex items-center justify-center gap-2"
-              style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)', background: 'linear-gradient(135deg, rgba(79,142,247,0.18) 0%, rgba(52,211,153,0.12) 100%)', border: '1px solid rgba(79,142,247,0.35)', letterSpacing: '0.03em' }}
-              whileHover={{ scale: 1.03, boxShadow: '0 0 28px rgba(79,142,247,0.25)' }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-            >
-              {tr.about_cta}
-            </motion.button>
-          </Link>
+          <motion.button
+            onClick={() => scrollToSection('contact')}
+            className="w-full glass-btn py-3 flex items-center justify-center gap-2 flex-1"
+            style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)', background: 'linear-gradient(135deg, rgba(79,142,247,0.18) 0%, rgba(52,211,153,0.12) 100%)', border: '1px solid rgba(79,142,247,0.35)', letterSpacing: '0.03em', cursor: 'pointer' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 0 28px rgba(79,142,247,0.25)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+          >
+            {tr.about_cta}
+          </motion.button>
           <motion.a href={personal.linkedin} target="_blank" rel="noopener noreferrer"
             className="glass-btn"
             style={{ width: 46, height: 46, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', flexShrink: 0 }}

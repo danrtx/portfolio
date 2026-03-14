@@ -306,3 +306,8 @@ body {
   z-index: 3;
   transition: background 0.4s ease;
 }
+
+/* Hide Mobile Nav when project detail is open */
+body.project-detail-open #mobile-nav-pill {
+  display: none !important;
+}

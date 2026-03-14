@@ -58,8 +58,10 @@ function ProjectDetailView({
   // Lock body scroll while detail view is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('project-detail-open');
     return () => {
       document.body.style.overflow = '';
+      document.body.classList.remove('project-detail-open');
     };
   }, []);
 
@@ -180,7 +182,7 @@ function ProjectDetailView({
 
       {/* ── Fixed bottom navigation — fully theme-aware ─────────────── */}
       <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
+        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 110,
         padding: '16px 6vw',
         background: 'var(--glass-bg-strong)',
         backdropFilter: 'blur(24px) saturate(180%)',

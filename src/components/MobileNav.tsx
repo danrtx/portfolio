@@ -71,7 +71,7 @@ export function MobileNav() {
   if (window.innerWidth >= 768) return null;
 
   return (
-    <nav style={{
+    <nav id="mobile-nav-pill" style={{
       position: 'fixed',
       bottom: '24px',
       left: '50%',
