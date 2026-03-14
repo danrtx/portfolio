@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Briefcase, Mail } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
+import { LiquidGlass } from 'simple-liquid-glass';
 
 export function MobileNav() {
   const { theme } = useAppContext();
@@ -72,25 +73,27 @@ export function MobileNav() {
   if (window.innerWidth >= 768) return null;
 
   return (
-    <nav id="mobile-nav-pill" style={{
+    <div id="mobile-nav-pill" style={{
       position: 'fixed',
       bottom: '24px',
       left: '50%',
       transform: 'translateX(-50%)',
       zIndex: 100,
-      display: 'flex',
-      alignItems: 'flex-end',
-      height: '60px',
-      padding: '0 12px',
-      gap: '4px',
-      overflow: 'visible',
-      background: isLight ? 'rgba(255,255,255,0.85)' : 'rgba(15,15,25,0.85)',
-      backdropFilter: 'blur(24px)',
-      WebkitBackdropFilter: 'blur(24px)',
-      border: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.12)',
-      borderRadius: '100px',
-      boxShadow: isLight ? '0 8px 32px rgba(0,0,0,0.12)' : '0 8px 32px rgba(0,0,0,0.4)',
     }}>
+      <LiquidGlass
+        radius={100}
+        frost={isLight ? 0.08 : 0.04}
+        effectMode="auto"
+        mobileFallback="css-only"
+      >
+        <nav style={{
+          display: 'flex',
+          alignItems: 'flex-end',
+          height: '60px',
+          padding: '0 12px',
+          gap: '4px',
+          overflow: 'visible',
+        }}>
       {navItems.map(item => (
         <button key={item.id} onClick={() => handleNavClick(item.id)}
           style={{
@@ -181,6 +184,8 @@ export function MobileNav() {
           </motion.div>
         </button>
       ))}
-    </nav>
+        </nav>
+      </LiquidGlass>
+    </div>
   );
 }
