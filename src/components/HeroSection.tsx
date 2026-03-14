@@ -54,6 +54,10 @@ export function HeroSection() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    // Make absolutely sure body scroll is enabled before scrolling
+    document.body.style.overflow = 'unset';
+    document.body.style.overflowX = 'hidden';
+
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });

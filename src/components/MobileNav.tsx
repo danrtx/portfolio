@@ -45,6 +45,9 @@ export function MobileNav() {
   ];
 
   const handleNavClick = (id: string) => {
+    // Make absolutely sure body scroll is enabled before scrolling
+    document.body.style.overflow = 'unset';
+    document.body.style.overflowX = 'hidden';
 
     // 1. Set active IMMEDIATELY on click — don't wait for scroll observer
     setActiveSection(id);

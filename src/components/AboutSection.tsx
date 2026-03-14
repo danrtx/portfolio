@@ -25,6 +25,10 @@ function ProfileCard() {
   const rotateY = useTransform(x, [-0.5, 0.5], [-7, 7]);
 
   const scrollToSection = (sectionId: string) => {
+    // Make absolutely sure body scroll is enabled before scrolling
+    document.body.style.overflow = 'unset';
+    document.body.style.overflowX = 'hidden';
+
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });

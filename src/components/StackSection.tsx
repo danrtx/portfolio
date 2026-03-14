@@ -4,13 +4,21 @@ import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
 
-const StackCard = ({ category, index }: { category: any, index: number }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const StackCard = ({ 
+  category, 
+  index, 
+  isOpen, 
+  onToggle 
+}: { 
+  category: any; 
+  index: number; 
+  isOpen: boolean; 
+  onToggle: () => void; 
+}) => {
   return (
     <motion.div
       className="glass-card"
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={onToggle}
       whileHover={{ y: -4 }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -83,6 +91,11 @@ const StackCard = ({ category, index }: { category: any, index: number }) => {
 export function StackSection() {
   const lang = useLanguage();
   const tr = translations[lang] as any;
+  const [openCard, setOpenCard] = useState<string | null>(null);
+
+  const toggleCard = (id: string) => {
+    setOpenCard(prev => prev === id ? null : id);
+  };
 
   const categories = [
     {
@@ -151,7 +164,13 @@ export function StackSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
-            <StackCard key={category.id} category={category} index={index} />
+            <StackCard 
+              key={category.id} 
+              category={category} 
+              index={index} 
+              isOpen={openCard === category.id} 
+              onToggle={() => toggleCard(category.id)} 
+            />
           ))}
         </div>
       </div>

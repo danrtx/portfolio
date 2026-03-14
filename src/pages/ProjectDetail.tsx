@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { projects } from '../data/projects';
@@ -21,6 +22,16 @@ export function ProjectDetail() {
   const currentIndex = projects.findIndex((p) => p.slug === projectSlug);
   const prevProject = projects[currentIndex - 1];
   const nextProject = projects[currentIndex + 1];
+
+  // Guarantee that scroll locks from previously opened modals/contexts
+  // are entirely stripped out when building out this distinct layout, 
+  // and released upon unmounting back to Home.
+  useEffect(() => {
+    document.body.style.overflow = 'unset';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   return (
     <div className="min-h-screen pt-24 pb-32">
