@@ -23,13 +23,16 @@ export function ProjectDetail() {
   const prevProject = projects[currentIndex - 1];
   const nextProject = projects[currentIndex + 1];
 
-  // Guarantee that scroll locks from previously opened modals/contexts
-  // are entirely stripped out when building out this distinct layout, 
-  // and released upon unmounting back to Home.
+  // Isolate project detail scroll lock
   useEffect(() => {
-    document.body.style.overflow = 'unset';
+    // Lock when open
+    document.body.style.overflow = 'hidden';
+    
     return () => {
-      document.body.style.overflow = 'unset';
+      // ALWAYS unlock on unmount — no conditions
+      document.body.style.overflow = '';
+      document.body.style.overflowY = '';
+      document.documentElement.style.overflow = '';
     };
   }, []);
 

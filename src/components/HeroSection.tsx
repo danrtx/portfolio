@@ -54,14 +54,20 @@ export function HeroSection() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    // Make absolutely sure body scroll is enabled before scrolling
-    document.body.style.overflow = 'unset';
-    document.body.style.overflowX = 'hidden';
+    // Step 1: ALWAYS unlock body scroll first — no exceptions
+    document.body.style.overflow = '';
+    document.body.style.overflowY = '';
+    document.body.style.overflowX = '';
+    document.documentElement.style.overflow = '';
 
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   };
 
   return (

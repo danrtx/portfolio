@@ -45,26 +45,32 @@ export function MobileNav() {
   ];
 
   const handleNavClick = (id: string) => {
-    // Make absolutely sure body scroll is enabled before scrolling
-    document.body.style.overflow = 'unset';
-    document.body.style.overflowX = 'hidden';
+    // Step 1: ALWAYS unlock body scroll first — no exceptions
+    document.body.style.overflow = '';
+    document.body.style.overflowY = '';
+    document.body.style.overflowX = '';
+    document.documentElement.style.overflow = '';
 
-    // 1. Set active IMMEDIATELY on click — don't wait for scroll observer
+    // 2. Set active IMMEDIATELY on click — don't wait for scroll observer
     setActiveSection(id);
     
-    // 2. Disable the scroll observer temporarily
+    // 3. Disable the scroll observer temporarily
     isScrollingRef.current = true;
     
-    // 3. Scroll to section
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const el = document.getElementById(id);
-      if (el) {
-        const y = el.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }
+    // 4. Scroll to section
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (id === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const el = document.getElementById(id);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }
+      });
+    });
     
     // 4. Re-enable observer after scroll animation finishes (~800ms)
     clearTimeout(scrollTimeoutRef.current);

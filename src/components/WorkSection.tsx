@@ -55,12 +55,10 @@ function ProjectDetailView({
   const hasPrev = projectIndex > 0;
   const hasNext = projectIndex < allProjects.length - 1;
 
-  // Lock body scroll while detail view is open
+  // Add project detail class for styling while open
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
     document.body.classList.add('project-detail-open');
     return () => {
-      document.body.style.overflow = '';
       document.body.classList.remove('project-detail-open');
     };
   }, []);
