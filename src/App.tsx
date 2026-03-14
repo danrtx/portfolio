@@ -15,6 +15,7 @@ import { Contact } from './pages/Contact';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { useAppContext } from './context/AppContext';
 import { translations } from './data/translations';
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
@@ -57,7 +58,6 @@ function AppShell() {
     </>
   );
 }
-
 
 export default function App() {
   return (
