@@ -6,10 +6,18 @@ import { useAppContext } from '../context/AppContext';
 export function MobileNav() {
   const { theme } = useAppContext();
   const [activeSection, setActiveSection] = useState('home');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const isLight = theme === 'light';
 
   const isScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  // Handle window resize dynamically
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Use IntersectionObserver to update active section naturally
   useEffect(() => {
@@ -79,7 +87,7 @@ export function MobileNav() {
     }, 800);
   };
 
-  if (window.innerWidth >= 768) return null;
+  if (!isMobile) return null;
 
   return (
     <nav id="mobile-nav-pill" style={{
