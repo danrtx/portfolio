@@ -4,7 +4,7 @@ import { Download } from 'lucide-react';
 import { ParticleScene } from './ParticleScene';
 import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
-import { useLanguage } from '../context/AppContext';
+import { useLanguage, useAppContext } from '../context/AppContext';
 import { translations } from '../data/translations';
 
 const letterVariants = {
@@ -26,6 +26,11 @@ export function HeroSection() {
   const [displayed, setDisplayed] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { theme } = useAppContext();
+  const isLight = theme === 'light';
+
+  const cvFile = lang === 'es' ? '/cv-danilo-montezuma-es.pdf' : '/cv-danilo-montezuma.pdf';
+  const cvDownloadName = lang === 'es' ? 'Danilo_Montezuma_CV_ES.pdf' : 'Danilo_Montezuma_CV_EN.pdf';
 
   useEffect(() => {
     setDisplayed(''); setIsDeleting(false); setRoleIdx(0);
@@ -78,40 +83,40 @@ export function HeroSection() {
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
-            marginBottom: '16px',
+            marginBottom: '24px',
             flexWrap: 'wrap',
           }}>
           
+          {/* Available for work badge */}
           <div className="glass-chip" style={{ display: 'inline-flex', alignItems: 'center', fontSize: '0.7rem', letterSpacing: '0.15em', height: 'fit-content' }}>
             <span className="animate-pulse" style={{ width: 6, height: 6, borderRadius: '50%', background: '#34D399', display: 'inline-block', marginRight: 8 }} />
             {tr.hero_badge}
           </div>
 
-          {/* CV download button (Mobile only) */}
+          {/* CV download button */}
           <a
-            href="/cv.pdf"
-            download="Danilo_Montezuma_CV.pdf"
-            className="md:hidden"
+            href={cvFile}
+            download={cvDownloadName}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '6px 14px',
+              padding: '6px 16px',
               borderRadius: '100px',
-              background: 'rgba(255,255,255,0.06)',
+              background: isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)',
               backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: '#F0F4FF',
-              fontSize: '11px',
+              border: isLight ? '1px solid rgba(0,0,0,0.12)' : '1px solid rgba(255,255,255,0.14)',
+              color: isLight ? '#0A0A14' : '#F0F4FF',
+              fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '0.5px',
               textDecoration: 'none',
               whiteSpace: 'nowrap',
-              height: 'fit-content'
+              transition: 'all 0.2s ease',
             }}
           >
-            <Download size={14} color="#34D399" />
-            <span>CV</span>
+            <Download size={13} color="#34D399" />
+            <span>↓ CV</span>
           </a>
         </motion.div>
 

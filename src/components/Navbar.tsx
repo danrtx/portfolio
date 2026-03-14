@@ -40,7 +40,6 @@ export function Navbar() {
 
   const textActive = isLight ? '#0A0A14' : '#F0F4FF';
   const textMuted = isLight ? 'rgba(10,10,20,0.55)' : 'rgba(240,244,255,0.55)';
-  const dividerColor = isLight ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.12)';
 
   return (
     <motion.nav
@@ -102,31 +101,6 @@ export function Navbar() {
           );
         })}
 
-        {/* Divider */}
-        <div style={{ width: 1, height: 20, background: dividerColor, margin: '0 4px' }} />
-
-        {/* Download CV */}
-        <motion.a
-          href={`/${tr.cv_file}`}
-          download={tr.cv_download_name}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-full"
-          style={{
-            fontFamily: 'DM Sans, sans-serif', fontSize: '0.82rem', fontWeight: 600,
-            color: '#34D399',
-            background: isLight ? 'rgba(52,211,153,0.12)' : 'rgba(52,211,153,0.10)',
-            border: '1px solid rgba(52,211,153,0.30)',
-            letterSpacing: '0.03em',
-            textDecoration: 'none', cursor: 'none',
-          }}
-          whileHover={{ scale: 1.05, background: 'rgba(52,211,153,0.20)', boxShadow: '0 0 16px rgba(52,211,153,0.25)' }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-        >
-          <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12">
-            <path d="M8 12l-4-4h2.5V3h3v5H12L8 12zM3 13h10v1.5H3V13z"/>
-          </svg>
-          {tr.nav_cv}
-        </motion.a>
       </div>
     </motion.nav>
   );
