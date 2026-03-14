@@ -12,10 +12,12 @@ export const translations = {
       sectionLabel: '— STACK',
       heading: 'What I bring to the table.',
       categories: {
-        core: 'Core Technologies',
+        frontend: 'Frontend Development',
+        backend: 'Backend Development',
+        mobile: 'Mobile Development',
         data: 'Data & Databases',
         devtools: 'Dev Tools & Workflow',
-        design: 'Design & Frontend',
+        design: 'Design & UI',
         soft: 'Soft Skills',
         workspace: 'Workspace & Productivity',
       }
@@ -147,10 +149,12 @@ export const translations = {
       sectionLabel: '— STACK',
       heading: 'Lo que traigo a la mesa.',
       categories: {
-        core: 'Tecnologías Principales',
+        frontend: 'Desarrollo Frontend',
+        backend: 'Desarrollo Backend',
+        mobile: 'Desarrollo Móvil',
         data: 'Datos y Bases de Datos',
         devtools: 'Herramientas y Flujo de Trabajo',
-        design: 'Diseño y Frontend',
+        design: 'Diseño y UI',
         soft: 'Habilidades Blandas',
         workspace: 'Productividad y Workspace',
       }

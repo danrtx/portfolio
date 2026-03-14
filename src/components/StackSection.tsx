@@ -99,46 +99,94 @@ export function StackSection() {
 
   const categories = [
     {
-      id: 'core',
-      icon: '⚡',
-      title: tr.stack.categories.core,
+      id: 'frontend',
+      icon: '🎨',
+      title: tr.stack.categories.frontend,
       color: '#4F8EF7',
-      skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js', 'Express', 'Python', 'Java']
+      skills: [
+        'React', 'Next.js', 'TypeScript', 'JavaScript',
+        'HTML5', 'CSS3', 'Tailwind CSS', 'Framer Motion',
+        'Three.js', 'WebGL', 'Redux', 'React Query',
+        'Responsive Design', 'Accessibility (a11y)'
+      ]
+    },
+    {
+      id: 'backend',
+      icon: '⚙️',
+      title: tr.stack.categories.backend,
+      color: '#34D399',
+      skills: [
+        'Node.js', 'Express.js', 'Spring Boot', 'Java',
+        'Python', 'FastAPI', 'REST APIs', 'GraphQL',
+        'JWT Auth', 'OAuth2', 'WebSockets', 'Microservices'
+      ]
+    },
+    {
+      id: 'mobile',
+      icon: '📱',
+      title: tr.stack.categories.mobile,
+      color: '#A78BFA',
+      skills: [
+        'Flutter', 'Dart', 'React Native',
+        'iOS basics', 'Android basics',
+        'Responsive Web (mobile-first)'
+      ]
     },
     {
       id: 'data',
       icon: '🗄️',
       title: tr.stack.categories.data,
-      color: '#34D399',
-      skills: ['PostgreSQL', 'MySQL', 'REST APIs', 'Power BI', 'Data Analysis']
+      color: '#F59E0B',
+      skills: [
+        'PostgreSQL', 'MySQL', 'MongoDB basics',
+        'Firebase', 'Supabase', 'SQL', 'ORM (Prisma)',
+        'Power BI', 'Data Analysis', 'Data Modeling'
+      ]
     },
     {
       id: 'devtools',
       icon: '🛠️',
       title: tr.stack.categories.devtools,
-      color: '#A78BFA',
-      skills: ['Git', 'GitLab', 'GitHub', 'CI/CD Pipelines', 'Agile/Scrum', 'VS Code']
+      color: '#06B6D4',
+      skills: [
+        'Git', 'GitHub', 'GitLab', 'CI/CD Pipelines',
+        'Docker basics', 'Vercel', 'AWS basics', 'GCP basics',
+        'Agile/Scrum', 'Jira', 'VS Code', 'Postman',
+        'npm/yarn', 'Vite', 'Webpack'
+      ]
     },
     {
       id: 'design',
-      icon: '🎨',
+      icon: '✏️',
       title: tr.stack.categories.design,
-      color: '#F59E0B',
-      skills: ['CSS', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Photoshop CS6', 'Responsive Design']
+      color: '#EC4899',
+      skills: [
+        'Figma', 'UI/UX Design', 'Glassmorphism',
+        'Design Systems', 'Photoshop CS6',
+        'Wireframing', 'Prototyping', 'Color Theory'
+      ]
     },
     {
       id: 'soft',
       icon: '🤝',
       title: tr.stack.categories.soft,
-      color: '#EC4899',
-      skills: ['Communication', 'Teamwork', 'Problem Solving', 'Punctuality', 'Adaptability', 'Fast Learner']
+      color: '#F97316',
+      skills: [
+        'Communication', 'Teamwork', 'Problem Solving',
+        'Critical Thinking', 'Adaptability', 'Fast Learner',
+        'Punctuality', 'Leadership basics', 'Multicultural Work'
+      ]
     },
     {
       id: 'workspace',
       icon: '💼',
       title: tr.stack.categories.workspace,
-      color: '#06B6D4',
-      skills: ['Google Workspace', 'Excel', 'Word', 'Power BI', 'Spanish (Native)', 'English (C2)']
+      color: '#84CC16',
+      skills: [
+        'Google Workspace', 'Microsoft Office', 'Excel',
+        'Word', 'Power BI', 'Notion', 'Slack',
+        'Spanish (Native)', 'English (C2 Proficient)'
+      ]
     },
   ];
 
