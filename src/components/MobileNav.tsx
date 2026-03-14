@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Briefcase, Mail } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Download } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
 export function MobileNav() {
@@ -41,9 +41,18 @@ export function MobileNav() {
     { id: 'about', label: 'About', Icon: User },
     { id: 'work', label: 'Work', Icon: Briefcase },
     { id: 'contact', label: 'Contact', Icon: Mail },
+    { id: 'cv', label: 'CV', Icon: Download },
   ];
 
-  const scrollTo = (id: string) => {
+  const handleNavClick = (id: string) => {
+    if (id === 'cv') {
+      const link = document.createElement('a');
+      link.href = '/cv.pdf'; // Must match public/cv.pdf
+      link.download = 'Danilo_Montezuma_CV.pdf';
+      link.click();
+      return;
+    }
+
     // 1. Set active IMMEDIATELY on click — don't wait for scroll observer
     setActiveSection(id);
     
@@ -80,7 +89,8 @@ export function MobileNav() {
       display: 'flex',
       alignItems: 'flex-end',
       height: '60px',
-      padding: '0 12px',
+      padding: '0 6px',
+      gap: '0px',
       overflow: 'visible',
       background: isLight ? 'rgba(255,255,255,0.85)' : 'rgba(15,15,25,0.85)',
       backdropFilter: 'blur(24px)',
@@ -88,10 +98,9 @@ export function MobileNav() {
       border: isLight ? '1px solid rgba(0,0,0,0.10)' : '1px solid rgba(255,255,255,0.12)',
       borderRadius: '100px',
       boxShadow: isLight ? '0 8px 32px rgba(0,0,0,0.12)' : '0 8px 32px rgba(0,0,0,0.4)',
-      gap: '4px'
     }}>
       {navItems.map(item => (
-        <button key={item.id} onClick={() => scrollTo(item.id)}
+        <button key={item.id} onClick={() => handleNavClick(item.id)}
           style={{
             position: 'relative',
             display: 'flex',
@@ -99,7 +108,7 @@ export function MobileNav() {
             alignItems: 'center',
             justifyContent: 'flex-end',
             height: '100%',
-            padding: '0 12px 8px',
+            padding: '0 8px 8px',
             overflow: 'visible',
             background: 'none',
             border: 'none',
@@ -130,20 +139,20 @@ export function MobileNav() {
                   width: '44px',
                   height: '44px',
                   borderRadius: '50%',
-                  background: isLight ? '#0A0A14' : '#ffffff',
+                  background: item.id === 'cv' ? '#34D399' : (isLight ? '#0A0A14' : '#ffffff'),
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: isLight ? '0 -6px 20px rgba(0,0,0,0.15)' : '0 -6px 20px rgba(0,0,0,0.25)',
+                  boxShadow: item.id === 'cv' ? '0 -6px 20px rgba(52,211,153,0.3)' : (isLight ? '0 -6px 20px rgba(0,0,0,0.15)' : '0 -6px 20px rgba(0,0,0,0.25)'),
                 }}
               >
-                <item.Icon size={18} color={isLight ? '#ffffff' : '#0A0A14'} />
+                <item.Icon size={18} color={item.id === 'cv' ? '#0A0A14' : (isLight ? '#ffffff' : '#0A0A14')} />
                 <span style={{
                   fontFamily: 'DM Sans, sans-serif',
                   fontSize: '9px',
                   fontWeight: 600,
-                  color: isLight ? '#ffffff' : '#0A0A14',
+                  color: item.id === 'cv' ? '#0A0A14' : (isLight ? '#ffffff' : '#0A0A14'),
                   marginTop: '2px',
                   textTransform: 'capitalize'
                 }}>
@@ -167,11 +176,11 @@ export function MobileNav() {
               marginBottom: '2px' // slight visual adjustment for alignment
             }}
           >
-            <item.Icon size={18} color={isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.45)'} />
+            <item.Icon size={18} color={item.id === 'cv' ? '#34D399' : (isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.45)')} />
             <span style={{
               fontFamily: 'DM Sans, sans-serif',
               fontSize: '9px',
-              color: isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.35)',
+              color: item.id === 'cv' ? '#34D399' : (isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.35)'),
               marginTop: '1px',
               textTransform: 'capitalize'
             }}>

@@ -81,11 +81,11 @@ export function HeroSection() {
 
         {/* DANILO title */}
         <h1 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, lineHeight: 0.9, letterSpacing: '0.04em', marginBottom: 16, marginTop: 0 }}>
-          <div style={{ display: 'flex', transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)`, transition: 'transform 0.1s ease-out' }}>
+          <div style={{ display: 'flex', transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)`, transition: 'transform 0.1s ease-out', width: '100%', overflow: 'hidden', whiteSpace: 'nowrap' }}>
             {title.split('').map((letter, i) => (
               <motion.span key={i} custom={i} variants={letterVariants} initial="hidden" animate="visible"
                 className="gradient-text"
-                style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(4rem, 9vw, 8rem)', lineHeight: 0.9, display: 'inline-block', fontWeight: 800 }}>
+                style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(3rem, 18vw, 6rem)', lineHeight: 0.9, display: 'inline-block', fontWeight: 800 }}>
                 {letter}
               </motion.span>
             ))}
