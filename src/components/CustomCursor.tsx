@@ -6,7 +6,13 @@ export function CustomCursor() {
   const pos = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
 
+  const isTouchDevice = () => {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  };
+
   useEffect(() => {
+    if (isTouchDevice()) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
@@ -46,6 +52,8 @@ export function CustomCursor() {
       cancelAnimationFrame(animId);
     };
   }, []);
+
+  if (isTouchDevice()) return null;
 
   return (
     <>

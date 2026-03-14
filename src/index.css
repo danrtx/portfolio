@@ -78,6 +78,16 @@ body {
   transition: background-color 0.4s ease, color 0.3s ease;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+  
+  button, a, [role="button"], .glass-btn {
+    cursor: pointer !important;
+  }
+}
+
 /* ─── Glass System ─── */
 .glass-card {
   background: var(--glass-bg);
