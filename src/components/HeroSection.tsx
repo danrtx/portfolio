@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Download } from 'lucide-react';
 import { ParticleScene } from './ParticleScene';
 import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
@@ -56,7 +57,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative w-full md:overflow-hidden"
       style={{ height: '100vh', display: 'flex', alignItems: 'center' }}
       onMouseMove={handleMouseMove}
     >
@@ -70,13 +71,48 @@ export function HeroSection() {
       {/* ── Left: all text content ──────────────────────────────────────── */}
       <div className="relative z-[2]" style={{ paddingLeft: '6vw', maxWidth: '55vw' }}>
 
-        {/* Badge */}
+        {/* Top Row: Badge + CV Button */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }} style={{ marginBottom: 20 }}>
-          <div className="glass-chip" style={{ display: 'inline-flex', alignItems: 'center', fontSize: '0.7rem', letterSpacing: '0.15em' }}>
+          transition={{ delay: 0.5, duration: 0.6 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            marginBottom: '16px',
+            flexWrap: 'wrap',
+          }}>
+          
+          <div className="glass-chip" style={{ display: 'inline-flex', alignItems: 'center', fontSize: '0.7rem', letterSpacing: '0.15em', height: 'fit-content' }}>
             <span className="animate-pulse" style={{ width: 6, height: 6, borderRadius: '50%', background: '#34D399', display: 'inline-block', marginRight: 8 }} />
             {tr.hero_badge}
           </div>
+
+          {/* CV download button (Mobile only) */}
+          <a
+            href="/cv.pdf"
+            download="Danilo_Montezuma_CV.pdf"
+            className="md:hidden"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 14px',
+              borderRadius: '100px',
+              background: 'rgba(255,255,255,0.06)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              color: '#F0F4FF',
+              fontSize: '11px',
+              fontWeight: 600,
+              letterSpacing: '0.5px',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              height: 'fit-content'
+            }}
+          >
+            <Download size={14} color="#34D399" />
+            <span>CV</span>
+          </a>
         </motion.div>
 
         {/* DANILO title */}
@@ -85,7 +121,7 @@ export function HeroSection() {
             {title.split('').map((letter, i) => (
               <motion.span key={i} custom={i} variants={letterVariants} initial="hidden" animate="visible"
                 className="gradient-text"
-                style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2.5rem, 15vw, 5rem)', lineHeight: 1, display: 'inline-block', fontWeight: 800 }}>
+                style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2.2rem, 13vw, 5rem)', lineHeight: 1, display: 'inline-block', fontWeight: 800 }}>
                 {letter}
               </motion.span>
             ))}

@@ -2,7 +2,6 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../context/AppContext';
 import { translations } from '../data/translations';
-import { Download } from 'lucide-react';
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 function GearIcon() {
@@ -178,32 +177,6 @@ export function SettingsButton() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Floating CV Button (Mobile only) */}
-      <a
-        href="/cv.pdf"
-        download="Danilo_Montezuma_CV.pdf"
-        className="md:hidden"
-        style={{
-          position: 'fixed',
-          bottom: '100px',
-          right: '16px',
-          zIndex: 99,
-          width: '44px',
-          height: '44px',
-          borderRadius: '50%',
-          background: 'rgba(15,15,25,0.85)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255,255,255,0.12)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-          cursor: 'none'
-        }}
-      >
-        <Download size={18} color="#34D399" />
-      </a>
 
       {/* Trigger Button */}
       <motion.button
