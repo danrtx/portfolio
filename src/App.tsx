@@ -9,6 +9,7 @@ import { CommandPalette } from './components/CommandPalette';
 import { MobileNav } from './components/MobileNav';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
+import { Stack } from './pages/Stack';
 import { Work } from './pages/Work';
 import { Contact } from './pages/Contact';
 import { ProjectDetail } from './pages/ProjectDetail';
@@ -22,6 +23,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/stack" element={<Stack />} />
         <Route path="/work" element={<Work />} />
         <Route path="/work/:projectSlug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Briefcase, Mail } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Layers } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
 export function MobileNav() {
@@ -27,7 +27,7 @@ export function MobileNav() {
       { threshold: 0.5 }
     );
 
-    const sections = ['home', 'about', 'work', 'contact'];
+    const sections = ['home', 'about', 'stack', 'work', 'contact'];
     sections.forEach(id => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -39,6 +39,7 @@ export function MobileNav() {
   const navItems = [
     { id: 'home', label: 'Home', Icon: Home },
     { id: 'about', label: 'About', Icon: User },
+    { id: 'stack', label: 'Stack', Icon: Layers },
     { id: 'work', label: 'Work', Icon: Briefcase },
     { id: 'contact', label: 'Contact', Icon: Mail },
   ];

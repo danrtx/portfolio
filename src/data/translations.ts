@@ -3,9 +3,23 @@ export const translations = {
     // Navbar
     nav_home: 'Home',
     nav_about: 'About',
+    nav_stack: 'Stack',
     nav_work: 'Work',
     nav_contact: 'Contact',
     nav_cv: 'CV',
+
+    stack: {
+      sectionLabel: '— STACK',
+      heading: 'What I bring to the table.',
+      categories: {
+        core: 'Core Technologies',
+        data: 'Data & Databases',
+        devtools: 'Dev Tools & Workflow',
+        design: 'Design & Frontend',
+        soft: 'Soft Skills',
+        workspace: 'Workspace & Productivity',
+      }
+    },
 
     // Hero
     hero_badge: 'AVAILABLE FOR WORK',
@@ -124,9 +138,23 @@ export const translations = {
     // Navbar
     nav_home: 'Inicio',
     nav_about: 'Sobre mí',
+    nav_stack: 'Stack',
     nav_work: 'Proyectos',
     nav_contact: 'Contacto',
     nav_cv: 'CV',
+
+    stack: {
+      sectionLabel: '— STACK',
+      heading: 'Lo que traigo a la mesa.',
+      categories: {
+        core: 'Tecnologías Principales',
+        data: 'Datos y Bases de Datos',
+        devtools: 'Herramientas y Flujo de Trabajo',
+        design: 'Diseño y Frontend',
+        soft: 'Habilidades Blandas',
+        workspace: 'Productividad y Workspace',
+      }
+    },
 
     // Hero
     hero_badge: 'DISPONIBLE PARA TRABAJAR',
@@ -245,6 +273,6 @@ export const translations = {
 export type TranslationKey = keyof typeof translations.en;
 
 /** Hook-friendly getter */
-export function t(lang: 'en' | 'es', key: TranslationKey): string | string[] {
-  return translations[lang][key] as string | string[];
+export function t(lang: 'en' | 'es', key: TranslationKey): any {
+  return translations[lang][key];
 }
