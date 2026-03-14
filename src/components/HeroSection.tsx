@@ -4,7 +4,7 @@ import { Download } from 'lucide-react';
 import { ParticleScene } from './ParticleScene';
 import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
-import { useLanguage, useAppContext } from '../context/AppContext';
+import { useLanguage, useTheme } from '../context/AppContext';
 import { translations } from '../data/translations';
 
 const letterVariants = {
@@ -26,7 +26,7 @@ export function HeroSection() {
   const [displayed, setDisplayed] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const { theme } = useAppContext();
+  const { theme } = useTheme();
   const isLight = theme === 'light';
 
   const cvFile = lang === 'es' ? '/cv-danilo-montezuma-es.pdf' : '/cv-danilo-montezuma.pdf';
