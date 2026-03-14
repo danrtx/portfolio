@@ -1,11 +1,12 @@
+import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage, useAppContext } from '../context/AppContext';
 import { translations } from '../data/translations';
-import { LiquidGlass } from 'simple-liquid-glass';
 
 export function Navbar() {
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
   const lang = useLanguage();
   const { theme } = useAppContext();
   const tr = translations[lang];
@@ -18,7 +19,25 @@ export function Navbar() {
     { path: '/contact', label: tr.nav_contact },
   ];
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   // ── Pill background adapts to theme ──────────────────────────────────────
+  const pillBg = isLight
+    ? 'rgba(255,255,255,0.88)'
+    : scrolled ? 'rgba(5,5,8,0.88)' : 'rgba(255,255,255,0.06)';
+
+  const pillBorder = isLight
+    ? '1px solid rgba(0,0,0,0.12)'
+    : '1px solid rgba(255,255,255,0.14)';
+
+  const pillShadow = isLight
+    ? '0 4px 24px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.9)'
+    : '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)';
+
   const textActive = isLight ? '#0A0A14' : '#F0F4FF';
   const textMuted = isLight ? 'rgba(10,10,20,0.55)' : 'rgba(240,244,255,0.55)';
   const dividerColor = isLight ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.12)';
@@ -31,18 +50,18 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.2 }}
     >
-      <LiquidGlass
-        radius={100}
-        frost={isLight ? 0.1 : 0.05}
-        effectMode="auto"
-        mobileFallback="css-only"
+      <div
+        className="flex items-center px-2 py-2 rounded-full"
+        style={{
+          background: pillBg,
+          backdropFilter: 'blur(32px) saturate(200%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(200%)',
+          border: pillBorder,
+          boxShadow: pillShadow,
+          transition: 'background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease',
+          gap: '4px',
+        }}
       >
-        <div
-          className="flex items-center px-2 py-2 rounded-full"
-          style={{
-            gap: '4px',
-          }}
-        >
         {navItems.map(({ path, label }) => {
           const isActive = location.pathname === path;
           return (
@@ -108,8 +127,7 @@ export function Navbar() {
           </svg>
           {tr.nav_cv}
         </motion.a>
-        </div>
-      </LiquidGlass>
+      </div>
     </motion.nav>
   );
 }
