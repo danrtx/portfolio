@@ -107,6 +107,7 @@ export function HeroSection() {
           <a
             href={cvFile}
             download={cvDownloadName}
+            aria-label="Download CV in PDF format"
             style={{
               display: 'flex',
               alignItems: 'center',

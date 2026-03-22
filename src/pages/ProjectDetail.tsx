@@ -56,6 +56,7 @@ export function ProjectDetail() {
         {/* Back button */}
         <motion.button
           onClick={() => navigate(-1)}
+          aria-label="Back to projects list"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
@@ -206,7 +207,7 @@ export function ProjectDetail() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
         >
           {prevProject ? (
-            <Link to={`/work/${prevProject.slug}`} className="flex-1">
+            <Link to={`/work/${prevProject.slug}`} className="flex-1" aria-label="View previous project">
               <motion.div
                 className="glass-card p-5"
                 whileHover={{ x: -4 }}
@@ -219,7 +220,7 @@ export function ProjectDetail() {
           ) : <div className="flex-1" />}
 
           {nextProject ? (
-            <Link to={`/work/${nextProject.slug}`} className="flex-1">
+            <Link to={`/work/${nextProject.slug}`} className="flex-1" aria-label="View next project">
               <motion.div
                 className="glass-card p-5 text-right"
                 whileHover={{ x: 4 }}

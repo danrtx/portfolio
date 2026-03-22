@@ -111,6 +111,7 @@ export function MobileNav() {
     }}>
       {navItems.map(item => (
         <button key={item.id} onClick={() => handleNavClick(item.id)}
+          aria-label={`Navigate to ${item.label} section`}
           style={{
             position: 'relative',
             display: 'flex',

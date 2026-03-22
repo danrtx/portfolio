@@ -141,8 +141,9 @@ function ProfileCard() {
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             title="LinkedIn"
+            aria-label="Visit Danilo Montezuma's LinkedIn profile"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" role="img" aria-hidden="true" focusable="false">
               <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z"/>
             </svg>
           </motion.a>

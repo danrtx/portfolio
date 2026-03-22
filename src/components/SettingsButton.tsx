@@ -6,7 +6,7 @@ import { translations } from '../data/translations';
 // ─── Icons ────────────────────────────────────────────────────────────────────
 function GearIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" role="img" aria-hidden="true" focusable="false">
       <circle cx="12" cy="12" r="3"/>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
     </svg>
@@ -15,7 +15,7 @@ function GearIcon() {
 
 function MoonIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15" role="img" aria-hidden="true" focusable="false">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
     </svg>
   );
@@ -23,7 +23,7 @@ function MoonIcon() {
 
 function SunIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="15" height="15" role="img" aria-hidden="true" focusable="false">
       <circle cx="12" cy="12" r="5"/>
       <line x1="12" y1="1" x2="12" y2="3"/>
       <line x1="12" y1="21" x2="12" y2="23"/>
@@ -43,6 +43,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: () => void 
     <button
       onClick={onChange}
       role="switch"
+      aria-label={`Switch to ${checked ? 'dark' : 'light'} mode`}
       aria-checked={checked}
       style={{
         width: 40, height: 22, borderRadius: 100, border: 'none', cursor: 'none',
@@ -71,6 +72,8 @@ function LangPill({ lang, setLang }: { lang: 'en' | 'es'; setLang: (l: 'en' | 'e
         <motion.button
           key={opt}
           onClick={() => setLang(opt)}
+          aria-label={opt === 'en' ? 'Switch language to English' : 'Cambiar idioma a Español'}
+          aria-pressed={lang === opt}
           style={{
             padding: '3px 12px', borderRadius: 100, border: 'none', cursor: 'none',
             fontFamily: 'DM Sans, sans-serif', fontSize: '0.72rem', fontWeight: 600,
@@ -182,6 +185,7 @@ export function SettingsButton() {
       <motion.button
         ref={btnRef}
         onClick={() => setOpen((o) => !o)}
+        aria-label="Open settings — change theme and language"
         style={{
           width: 44, height: 44, borderRadius: '50%',
           cursor: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center',
