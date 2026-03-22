@@ -48,11 +48,11 @@ function AppShell() {
         <AnimatedRoutes />
       </main>
       <footer className="py-8 text-center" style={{ borderTop: '1px solid var(--glass-border)' }}>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', letterSpacing: '0.1em' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '14px', letterSpacing: '0.05em', opacity: 0.9 }}>
           © {new Date().getFullYear()} {tr.footer_text} &nbsp;·&nbsp; Built with React · TypeScript · Vite
         </p>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.65rem', marginTop: 4, opacity: 0.6 }}>
-          Press <kbd style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 4, padding: '0 5px', fontSize: '0.6rem' }}>K</kbd> to open command palette
+        <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginTop: 8, opacity: 0.75 }}>
+          Press <kbd style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 4, padding: '0 5px', fontSize: '12px' }}>K</kbd> to open command palette
         </p>
       </footer>
     </>
