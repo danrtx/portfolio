@@ -98,7 +98,7 @@ export function HeroSection() {
           }}>
           
           {/* Available for work badge */}
-          <div className="glass-chip" style={{ display: 'inline-flex', alignItems: 'center', fontSize: '0.7rem', letterSpacing: '0.15em', height: 'fit-content' }}>
+          <div className="glass-chip" style={{ color: 'rgba(255,255,255,0.90)', display: 'inline-flex', alignItems: 'center', fontSize: '0.7rem', letterSpacing: '0.15em', height: 'fit-content' }}>
             <span className="animate-pulse" style={{ width: 6, height: 6, borderRadius: '50%', background: '#34D399', display: 'inline-block', marginRight: 8 }} />
             {tr.hero_badge}
           </div>
@@ -194,9 +194,9 @@ export function HeroSection() {
       {/* Scroll indicator */}
       <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }}>
-        <span style={{ color: 'rgba(240,244,255,0.3)', fontSize: '0.65rem', letterSpacing: '0.2em' }}>{tr.hero_scroll}</span>
+        <span style={{ color: 'rgba(240,244,255,0.75)', fontSize: '0.65rem', letterSpacing: '0.2em' }}>{tr.hero_scroll}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ color: 'rgba(240,244,255,0.3)' }}>↓</motion.div>
+          style={{ color: 'rgba(240,244,255,0.75)' }}>↓</motion.div>
       </motion.div>
 
       {/* Bottom fade */}

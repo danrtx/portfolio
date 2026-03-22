@@ -17,7 +17,7 @@
   --accent2: #A78BFA;
   --accent3: #34D399;
   --text-primary: #F0F4FF;
-  --text-muted: rgba(240, 244, 255, 0.45);
+  --text-muted: rgba(240,244,255,0.75);
 }
 
 /* ─── Light Mode Overrides ─── */
@@ -174,7 +174,7 @@ body {
 }
 
 [data-theme="light"] .glass-input::placeholder {
-  color: rgba(10, 10, 20, 0.35);
+  color: rgba(10,10,20,0.65);
 }
 
 .glass-input:focus {

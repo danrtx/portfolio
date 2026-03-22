@@ -106,7 +106,7 @@ export function TerminalCard() {
         {['#FF5F57', '#FFBD2E', '#28C840'].map((c) => (
           <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c, flexShrink: 0 }} />
         ))}
-        <span style={{ fontFamily: 'DM Sans', fontSize: '0.65rem', color: 'rgba(240,244,255,0.3)', marginLeft: 6, letterSpacing: '0.06em' }}>
+        <span style={{ fontFamily: 'DM Sans', fontSize: '0.65rem', color: 'rgba(240,244,255,0.75)', marginLeft: 6, letterSpacing: '0.06em' }}>
           danilo@portfolio ~ bash
         </span>
       </div>

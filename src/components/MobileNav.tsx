@@ -187,11 +187,11 @@ export function MobileNav() {
               marginBottom: '2px' // slight visual adjustment for alignment
             }}
           >
-            <item.Icon size={18} color={isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.45)'} />
+            <item.Icon size={18} color={isLight ? 'rgba(10,10,20,0.65)' : 'rgba(255,255,255,0.75)'} />
             <span style={{
               fontFamily: 'DM Sans, sans-serif',
               fontSize: '9px',
-              color: isLight ? 'rgba(10,10,20,0.40)' : 'rgba(255,255,255,0.35)',
+              color: isLight ? 'rgba(10,10,20,0.65)' : 'rgba(255,255,255,0.72)',
               marginTop: '1px',
               textTransform: 'capitalize'
             }}>

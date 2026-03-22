@@ -153,7 +153,7 @@ export function CommandPalette({ lang }: Props) {
               <kbd style={{
                 background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)',
                 borderRadius: 6, padding: '2px 7px', fontSize: '0.65rem',
-                color: 'rgba(240,244,255,0.35)', fontFamily: 'DM Sans, sans-serif',
+                color: 'rgba(240,244,255,0.75)', fontFamily: 'DM Sans, sans-serif',
               }}>esc</kbd>
             </div>
 
@@ -201,10 +201,10 @@ export function CommandPalette({ lang }: Props) {
             }}>
               {[['↑↓', 'navigate'], ['↵', 'select'], ['esc', 'close']].map(([key, desc]) => (
                 <span key={key} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <kbd style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 5, padding: '1px 6px', fontSize: '0.65rem', color: 'rgba(240,244,255,0.35)', fontFamily: 'DM Sans' }}>
+                  <kbd style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 5, padding: '1px 6px', fontSize: '0.65rem', color: 'rgba(240,244,255,0.75)', fontFamily: 'DM Sans' }}>
                     {key}
                   </kbd>
-                  <span style={{ fontSize: '0.65rem', color: 'rgba(240,244,255,0.25)', fontFamily: 'DM Sans' }}>{desc}</span>
+                  <span style={{ fontSize: '0.65rem', color: 'rgba(240,244,255,0.75)', fontFamily: 'DM Sans' }}>{desc}</span>
                 </span>
               ))}
             </div>

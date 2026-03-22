@@ -213,7 +213,7 @@ export function ProjectDetail() {
                 whileHover={{ x: -4 }}
                 style={{ cursor: 'none' }}
               >
-                <div style={{ color: 'rgba(240,244,255,0.35)', fontSize: '0.65rem', letterSpacing: '0.15em', marginBottom: 6 }}>← PREVIOUS</div>
+                <div style={{ color: 'rgba(240,244,255,0.75)', fontSize: '0.65rem', letterSpacing: '0.15em', marginBottom: 6 }}>← PREVIOUS</div>
                 <div style={{ color: '#F0F4FF', fontFamily: 'Syne, sans-serif', fontWeight: 600 }}>{prevProject.title}</div>
               </motion.div>
             </Link>
@@ -226,7 +226,7 @@ export function ProjectDetail() {
                 whileHover={{ x: 4 }}
                 style={{ cursor: 'none' }}
               >
-                <div style={{ color: 'rgba(240,244,255,0.35)', fontSize: '0.65rem', letterSpacing: '0.15em', marginBottom: 6 }}>NEXT →</div>
+                <div style={{ color: 'rgba(240,244,255,0.75)', fontSize: '0.65rem', letterSpacing: '0.15em', marginBottom: 6 }}>NEXT →</div>
                 <div style={{ color: '#F0F4FF', fontFamily: 'Syne, sans-serif', fontWeight: 600 }}>{nextProject.title}</div>
               </motion.div>
             </Link>

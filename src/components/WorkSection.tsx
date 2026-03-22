@@ -236,13 +236,13 @@ function ProjectCard({ project, isReal, onOpen }: { project: Project; isReal: bo
           <div style={{ height: 190, position: 'relative', overflow: 'hidden' }}>
             <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(5,5,8,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontFamily: 'DM Sans', fontSize: '0.72rem', color: 'rgba(240,244,255,0.45)', background: 'rgba(0,0,0,0.5)', borderRadius: 100, padding: '6px 16px', border: '1px solid rgba(255,255,255,0.1)', letterSpacing: '0.1em' }}>
+              <span style={{ fontFamily: 'DM Sans', fontSize: '0.72rem', color: 'rgba(240,244,255,0.75)', background: 'rgba(0,0,0,0.5)', borderRadius: 100, padding: '6px 16px', border: '1px solid rgba(255,255,255,0.1)', letterSpacing: '0.1em' }}>
                 COMING SOON
               </span>
             </div>
           </div>
           <div className="p-4">
-            <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'rgba(240,244,255,0.35)', marginBottom: 6 }}>{project.title}</h3>
+            <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'rgba(240,244,255,0.75)', marginBottom: 6 }}>{project.title}</h3>
             <p style={{ color: 'rgba(240,244,255,0.2)', fontSize: '0.8rem', lineHeight: 1.6 }}>{project.description}</p>
           </div>
         </div>

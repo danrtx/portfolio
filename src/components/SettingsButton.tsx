@@ -79,7 +79,7 @@ function LangPill({ lang, setLang }: { lang: 'en' | 'es'; setLang: (l: 'en' | 'e
             fontFamily: 'DM Sans, sans-serif', fontSize: '0.72rem', fontWeight: 600,
             letterSpacing: '0.05em', textTransform: 'uppercase',
             background: lang === opt ? '#4F8EF7' : 'transparent',
-            color: lang === opt ? '#fff' : 'rgba(240,244,255,0.45)',
+            color: lang === opt ? '#fff' : 'rgba(240,244,255,0.75)',
             transition: 'color 0.2s ease',
           }}
           whileHover={{ color: '#F0F4FF' }}
