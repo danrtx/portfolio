@@ -80,7 +80,7 @@ export function ProjectDetail() {
                 <span key={tag} className="glass-chip" style={{ fontSize: '0.65rem' }}>{tag}</span>
               ))}
             </motion.div>
-            <motion.h1
+            <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
@@ -88,7 +88,7 @@ export function ProjectDetail() {
               style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800, color: '#F0F4FF' }}
             >
               {project.title}
-            </motion.h1>
+            </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

@@ -200,7 +200,7 @@ export function StackSection() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="glass-chip mb-6">{tr.stack.sectionLabel}</div>
+          <span aria-hidden="true" className="glass-chip mb-6 flex lg:inline-flex w-fit">{tr.stack.sectionLabel}</span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-8 text-glass">
             {lang === 'en' ? (
               <>What I <span className="gradient-text">bring</span> to the table.</>

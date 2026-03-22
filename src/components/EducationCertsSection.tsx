@@ -13,10 +13,10 @@ export function EducationCertsSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Education */}
         <div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
+          <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
             {tr.education_label}
-          </motion.div>
+          </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
             className="font-heading text-glass mb-8"
             style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
@@ -31,10 +31,10 @@ export function EducationCertsSection() {
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                   transition={{ delay: i * 0.1, type: 'spring', stiffness: 200 }}
                   className="glass-card p-5" whileHover={{ y: -3 }}>
-                  <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
+                  <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
                     {t.degree}
-                  </div>
-                  <div style={{ color: ed.accent, fontSize: '0.82rem', fontWeight: 600, marginBottom: 4 }}>{ed.institution}</div>
+                  </h3>
+                  <h4 style={{ color: ed.accent, fontSize: '0.82rem', fontWeight: 600, marginBottom: 4 }}>{ed.institution}</h4>
                   <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{ed.period} · {t.detail}</div>
                 </motion.div>
               );
@@ -44,10 +44,10 @@ export function EducationCertsSection() {
 
         {/* Certifications */}
         <div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
+          <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
             {tr.certs_label}
-          </motion.div>
+          </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
             className="font-heading text-glass mb-8"
             style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
@@ -64,10 +64,10 @@ export function EducationCertsSection() {
                   {cert.icon}
                 </div>
                 <div>
-                  <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 3 }}>
+                  <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 3 }}>
                     {cert.title}
-                  </div>
-                  <div style={{ color: cert.accent, fontSize: '0.8rem', fontWeight: 600, marginBottom: 2 }}>{cert.issuer}</div>
+                  </h3>
+                  <h4 style={{ color: cert.accent, fontSize: '0.8rem', fontWeight: 600, marginBottom: 2 }}>{cert.issuer}</h4>
                   <div style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>
                     {cert.date}{cert.detail ? ` · ${cert.detail}` : ''}
                   </div>

@@ -141,10 +141,10 @@ export function ContactSection() {
   return (
     <section className="py-24 px-6 max-w-4xl mx-auto" id="contact">
       {/* Section label */}
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="mb-4" style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
+      <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+        className="mb-4 block" style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
         {tr.contact_label}
-      </motion.div>
+      </motion.span>
 
       <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         transition={{ delay: 0.1 }} className="font-heading text-glass mb-2"

@@ -159,10 +159,10 @@ export function AboutSection() {
 
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto" id="about">
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-4"
-        style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
+      <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-4 block"
+        style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
         {tr.about_label}
-      </motion.div>
+      </motion.span>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div>

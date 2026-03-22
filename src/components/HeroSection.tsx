@@ -147,10 +147,10 @@ export function HeroSection() {
         {/* Typewriter */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}
           style={{ marginBottom: 20, minHeight: '2rem', transform: `translate(${mousePos.x * 0.4}px, ${mousePos.y * 0.3}px)`, transition: 'transform 0.15s ease-out' }}>
-          <span style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(1rem, 2vw, 1.6rem)', fontWeight: 600, color: 'rgba(240,244,255,0.7)', letterSpacing: '0.04em' }}>
+          <p style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(1rem, 2vw, 1.6rem)', fontWeight: 600, color: 'rgba(240,244,255,0.7)', letterSpacing: '0.04em', margin: 0 }}>
             {displayed}
             <span className="animate-pulse" style={{ color: '#4F8EF7', marginLeft: 2 }}>|</span>
-          </span>
+          </p>
         </motion.div>
 
         {/* Description */}

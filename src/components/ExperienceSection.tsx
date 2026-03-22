@@ -12,10 +12,10 @@ export function ExperienceSection() {
 
   return (
     <section className="py-20 px-6 max-w-6xl mx-auto" id="experience">
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
+      <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+        style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }} className="mb-4">
         {tr.experience_label}
-      </motion.div>
+      </motion.span>
 
       <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
         className="font-heading text-glass mb-12"
@@ -56,7 +56,7 @@ export function ExperienceSection() {
                           </span>
                         )}
                       </div>
-                      <div style={{ color: job.accent, fontSize: '0.85rem', fontWeight: 600 }}>{job.company}</div>
+                      <h4 style={{ color: job.accent, fontSize: '0.85rem', fontWeight: 600 }}>{job.company}</h4>
                       <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: 2 }}>
                         {t.period} · {job.location}
                       </div>

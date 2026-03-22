@@ -106,9 +106,9 @@ function ProjectDetailView({
             )}
           </div>
           {/* Title/subtitle stay white over image — textShadow ensures contrast on both themes */}
-          <h1 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 5vw, 4rem)', color: '#F0F4FF', margin: 0, lineHeight: 1.05, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
+          <h2 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: 'clamp(2rem, 5vw, 4rem)', color: '#F0F4FF', margin: 0, lineHeight: 1.05, textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
             {project.title}
-          </h1>
+          </h2>
           <p style={{ fontFamily: 'DM Sans', fontSize: '1rem', color: 'rgba(240,244,255,0.75)', margin: '8px 0 0', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>
             {project.subtitle}
           </p>
@@ -322,10 +322,10 @@ export function WorkSection() {
             <section className="py-24 px-6 max-w-6xl mx-auto">
               {view === 'grid' && (
                 <>
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="mb-4" style={{ color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
+              <motion.span aria-hidden="true" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="mb-4 block" style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.7rem', letterSpacing: '0.25em' }}>
                 {tr.work_label}
-              </motion.div>
+              </motion.span>
               <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ delay: 0.1 }} className="font-heading text-glass mb-12"
                 style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
