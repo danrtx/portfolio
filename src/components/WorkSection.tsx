@@ -214,16 +214,20 @@ function ProjectDetailView({
 }
 
 // ─── Project grid card ────────────────────────────────────────────────────────
-function ProjectCard({ project, isReal, onOpen }: { project: Project; isReal: boolean; onOpen?: () => void }) {
+function ProjectCard({ project, isReal, onOpen, index }: { project: Project; isReal: boolean; onOpen?: () => void; index: number }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-0.5, 0.5], [6, -6]);
   const rotateY = useTransform(x, [-0.5, 0.5], [-6, 6]);
+  const [glare, setGlare] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - r.left) / r.width - 0.5);
-    y.set((e.clientY - r.top) / r.height - 0.5);
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    x.set(px - 0.5);
+    y.set(py - 0.5);
+    setGlare({ x: px * 100, y: py * 100 });
   };
 
   const isLive = Boolean(project.link);
@@ -251,17 +255,18 @@ function ProjectCard({ project, isReal, onOpen }: { project: Project; isReal: bo
   }
 
   return (
-    <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', stiffness: 200 }}
+    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }}
+      transition={{ type: 'spring', stiffness: 200, delay: index * 0.08 }}
       onMouseMove={handleMouseMove} onMouseLeave={() => { x.set(0); y.set(0); }}
       style={{ rotateX, rotateY, perspective: 800, transformStyle: 'preserve-3d' }}
       whileHover={{ y: -8 }}>
-      <div className="glass-card overflow-hidden" style={{ cursor: 'none' }}>
+      <div className="glass-card overflow-hidden glare-host" style={{ cursor: 'none' }} data-cursor-text="View →">
         <MockBrowser url={project.link || `danilo.dev/${project.slug}`}>
           <div style={{ height: 200, position: 'relative', overflow: 'hidden' }}>
             <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover"
               whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(5,5,8,0.7) 0%, transparent 50%)' }} />
+            <div className="glare-layer" style={{ background: `radial-gradient(220px circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.25), transparent 60%)` }} />
             {isLive && (
               <div style={{ position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(52,211,153,0.15)', border: '1px solid rgba(52,211,153,0.35)', borderRadius: 100, padding: '3px 9px', fontSize: '0.6rem', color: '#34D399', fontFamily: 'DM Sans', fontWeight: 600 }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#34D399', display: 'inline-block', boxShadow: '0 0 6px #34D399' }} />
@@ -337,7 +342,7 @@ export function WorkSection() {
               {/* Project cards — centered 2-column grid, max width so cards don't stretch */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24, maxWidth: 820, margin: '0 auto' }}>
                 {allProjects.map((project, idx) => (
-                  <ProjectCard key={project.id} project={project} isReal={true}
+                  <ProjectCard key={project.id} project={project} isReal={true} index={idx}
                     onOpen={() => openDetail(idx)} />
                 ))}
               </div>

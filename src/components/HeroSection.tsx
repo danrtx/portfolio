@@ -6,6 +6,7 @@ import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
 import { useLanguage, useTheme } from '../context/AppContext';
 import { translations } from '../data/translations';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 const letterVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -28,6 +29,8 @@ export function HeroSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const workBtn = useMagnetic<HTMLButtonElement>(0.3);
+  const contactBtn = useMagnetic<HTMLButtonElement>(0.3);
 
   const cvFile = lang === 'es' ? '/cv-danilo-montezuma-es.pdf' : '/cv-danilo-montezuma.pdf';
   const cvDownloadName = lang === 'es' ? 'Danilo_Montezuma_CV_ES.pdf' : 'Danilo_Montezuma_CV_EN.pdf';
@@ -164,16 +167,20 @@ export function HeroSection() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, type: 'spring', stiffness: 200 }}
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          <motion.button className="glass-btn px-8 py-3"
+          <motion.button ref={workBtn.ref} className="glass-btn px-8 py-3"
             onClick={() => scrollToSection('work')}
-            style={{ fontFamily: 'DM Sans, sans-serif', color: '#F0F4FF', fontSize: '0.9rem', background: 'rgba(79,142,247,0.15)', border: '1px solid rgba(79,142,247,0.4)', cursor: 'pointer' }}
+            onMouseMove={workBtn.onMouseMove} onMouseLeave={workBtn.onMouseLeave}
+            data-cursor-text="Work ↓"
+            style={{ fontFamily: 'DM Sans, sans-serif', color: '#F0F4FF', fontSize: '0.9rem', background: 'rgba(79,142,247,0.15)', border: '1px solid rgba(79,142,247,0.4)', cursor: 'none', x: workBtn.x, y: workBtn.y }}
             whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(79,142,247,0.3)' }} whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
             {tr.hero_cta_work}
           </motion.button>
-          <motion.button className="glass-btn px-8 py-3"
+          <motion.button ref={contactBtn.ref} className="glass-btn px-8 py-3"
             onClick={() => scrollToSection('contact')}
-            style={{ fontFamily: 'DM Sans, sans-serif', color: 'rgba(240,244,255,0.7)', fontSize: '0.9rem', cursor: 'pointer' }}
+            onMouseMove={contactBtn.onMouseMove} onMouseLeave={contactBtn.onMouseLeave}
+            data-cursor-text="Say hi ✦"
+            style={{ fontFamily: 'DM Sans, sans-serif', color: 'rgba(240,244,255,0.7)', fontSize: '0.9rem', cursor: 'none', x: contactBtn.x, y: contactBtn.y }}
             whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}>
             {tr.hero_cta_contact}
