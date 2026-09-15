@@ -197,26 +197,54 @@ body {
 
 /* ─── Gradient Text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent1));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   transition: background 0.4s ease;
+  animation: gradientShift 6s ease-in-out infinite;
 }
 
 /* In light mode, hero title uses deep navy gradient for high contrast */
 [data-theme="light"] .gradient-text {
   background: linear-gradient(135deg, #0A0A2E 0%, #1e2d6e 50%, #0A0A2E 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-green {
-  background: linear-gradient(135deg, var(--accent3), var(--accent1));
+  background: linear-gradient(135deg, var(--accent3), var(--accent1), var(--accent3));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ─── Mouse-tracked glare (hover-only spotlight for cards) ─── */
+.glare-host {
+  position: relative;
+}
+
+.glare-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glare-host:hover .glare-layer {
+  opacity: 1;
 }
 
 /* ─── Float Animation ─── */
@@ -320,4 +348,13 @@ body {
 /* Hide Mobile Nav when project detail is open */
 body.project-detail-open #mobile-nav-pill {
   display: none !important;
+}
+
+/* ─── Respect reduced-motion preference for looping animations ─── */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text,
+  .gradient-text-green,
+  .float-animation {
+    animation: none;
+  }
 }

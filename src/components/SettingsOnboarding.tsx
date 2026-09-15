@@ -23,19 +23,22 @@ export default function SettingsOnboarding() {
     const seen = localStorage.getItem('settings-onboarding');
     
     if (!seen) {
+      // +3400ms so timers start after the intro overlay (IntroAnimation) has
+      // fully finished, instead of ticking away hidden behind it.
+      const INTRO_OFFSET = 3400;
       const pulseTimer = setTimeout(() => {
         setShowOnboarding(true);
-      }, 2000);
+      }, 2000 + INTRO_OFFSET);
 
       const tooltipTimer = setTimeout(() => {
         setShowTooltip(true);
-      }, 2300);
+      }, 2300 + INTRO_OFFSET);
 
       const hideTimer = setTimeout(() => {
         setShowOnboarding(false);
         setShowTooltip(false);
         localStorage.setItem('settings-onboarding', 'true');
-      }, 7300);
+      }, 7300 + INTRO_OFFSET);
 
       return () => {
         clearTimeout(pulseTimer);

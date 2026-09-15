@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { AppProvider } from './context/AppContext';
 import { Navbar } from './components/Navbar';
+import { IntroAnimation } from './components/IntroAnimation';
 import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SettingsButton } from './components/SettingsButton';
@@ -38,6 +39,7 @@ function AppShell() {
 
   return (
     <>
+      <IntroAnimation />
       <CustomCursor />
       <ScrollProgress />
       <Navbar />

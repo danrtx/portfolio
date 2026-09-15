@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 import { skills, personal } from '../data/projects';
@@ -23,6 +23,7 @@ function ProfileCard() {
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-0.5, 0.5], [7, -7]);
   const rotateY = useTransform(x, [-0.5, 0.5], [-7, 7]);
+  const [glare, setGlare] = useState({ x: 50, y: 50 });
 
   const scrollToSection = (sectionId: string) => {
     // Step 1: ALWAYS unlock body scroll first — no exceptions
@@ -44,8 +45,11 @@ function ProfileCard() {
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    x.set(px - 0.5);
+    y.set(py - 0.5);
+    setGlare({ x: px * 100, y: py * 100 });
   };
   const onMouseLeave = () => { x.set(0); y.set(0); };
 
@@ -68,6 +72,7 @@ function ProfileCard() {
       transition={{ type: 'spring', stiffness: 250, damping: 28 }}
     >
       <div
+        className="glare-host"
         style={{
           background: 'var(--glass-bg-strong)',
           backdropFilter: 'blur(28px) saturate(180%)',
@@ -83,6 +88,7 @@ function ProfileCard() {
         {/* Decorative orbs */}
         <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, background: 'radial-gradient(circle, rgba(79,142,247,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', bottom: -30, left: -30, width: 120, height: 120, background: 'radial-gradient(circle, rgba(52,211,153,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div className="glare-layer" style={{ background: `radial-gradient(300px circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.10), transparent 60%)` }} />
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">

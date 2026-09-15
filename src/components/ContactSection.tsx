@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { socialLinks } from '../data/projects';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 
 const SocialIcon = ({ name }: { name: string }) => {
@@ -66,6 +67,7 @@ export function ContactSection() {
   const lang = useLanguage();
   const tr = translations[lang];
   const formRef = useRef<HTMLFormElement>(null);
+  const submitBtn = useMagnetic<HTMLButtonElement>(0.25);
 
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -229,7 +231,9 @@ export function ContactSection() {
             </div>
 
             {/* Submit button */}
-            <motion.button type="submit" disabled={status === 'sending'}
+            <motion.button ref={submitBtn.ref} type="submit" disabled={status === 'sending'}
+              onMouseMove={submitBtn.onMouseMove} onMouseLeave={submitBtn.onMouseLeave}
+              data-cursor-text="Send ✦"
               className="glass-btn px-8 py-3 flex items-center gap-2"
               style={{
                 color: '#F0F4FF', fontFamily: 'DM Sans', fontSize: '0.9rem',
@@ -237,6 +241,7 @@ export function ContactSection() {
                 border: `1px solid ${status === 'error' ? 'rgba(255,95,87,0.5)' : 'rgba(52,211,153,0.4)'}`,
                 boxShadow: '0 0 20px rgba(52,211,153,0.1)',
                 opacity: status === 'sending' ? 0.8 : 1,
+                x: submitBtn.x, y: submitBtn.y,
               }}
               whileHover={{ scale: 1.04, boxShadow: '0 0 30px rgba(52,211,153,0.25)' }}
               whileTap={{ scale: 0.97 }}
