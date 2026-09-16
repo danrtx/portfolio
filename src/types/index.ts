@@ -28,3 +28,11 @@ export interface StatItem {
   suffix: string;
   label: string;
 }
+
+export interface Testimonial {
+  id: string;
+  company: string;
+  accent: string;
+  /** True while name/quote are still placeholder copy — swap in real testimonials before shipping. */
+  placeholder?: boolean;
+}

@@ -62,6 +62,23 @@ export const translations = {
     certs_heading_1: 'Credentials',
     certs_heading_accent: 'earned',
 
+    // Testimonials
+    testimonials_label: '— TESTIMONIALS',
+    testimonials_heading_1: 'What people',
+    testimonials_heading_accent: 'say',
+    testimonials_data: [
+      {
+        name: 'Add a name',
+        role: 'Supervisor at Cambridge Academy of Languages',
+        quote: 'Replace this with a real 1–3 sentence quote from a colleague or supervisor about working with you.',
+      },
+      {
+        name: 'Add a name',
+        role: 'Supervisor at Camp Michigania',
+        quote: 'Replace this with a real quote — e.g. about your teamwork or communication during the program.',
+      },
+    ],
+
     // Work/Projects
     work_label: '— SELECTED WORK',
     work_heading_1: 'Projects that',
@@ -198,6 +215,23 @@ export const translations = {
     certs_label: '— CERTIFICACIONES',
     certs_heading_1: 'Credenciales',
     certs_heading_accent: 'obtenidas',
+
+    // Testimonials
+    testimonials_label: '— TESTIMONIOS',
+    testimonials_heading_1: 'Lo que dicen',
+    testimonials_heading_accent: 'de mí',
+    testimonials_data: [
+      {
+        name: 'Agrega un nombre',
+        role: 'Supervisor/a en Cambridge Academy of Languages',
+        quote: 'Reemplaza esto con una cita real de 1 a 3 frases de un colega o supervisor sobre trabajar contigo.',
+      },
+      {
+        name: 'Agrega un nombre',
+        role: 'Supervisor/a en Camp Michigania',
+        quote: 'Reemplaza esto con una cita real — ej. sobre tu trabajo en equipo o comunicación durante el programa.',
+      },
+    ],
 
     // Work/Projects
     work_label: '— PROYECTOS',
