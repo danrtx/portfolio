@@ -197,31 +197,42 @@ body {
 
 /* ─── Gradient Text ─── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent1));
-  background-size: 200% auto;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   transition: background 0.4s ease;
-  animation: gradientShift 6s ease-in-out infinite;
 }
 
 /* In light mode, hero title uses deep navy gradient for high contrast */
 [data-theme="light"] .gradient-text {
   background: linear-gradient(135deg, #0A0A2E 0%, #1e2d6e 50%, #0A0A2E 100%);
-  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-green {
-  background: linear-gradient(135deg, var(--accent3), var(--accent1), var(--accent3));
-  background-size: 200% auto;
+  background: linear-gradient(135deg, var(--accent3), var(--accent1));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Animated shimmer — reserved for the one or two signature name moments
+   (Hero title, intro wordmark), not every gradient accent on the page. */
+.shimmer {
+  background-size: 200% auto;
   animation: gradientShift 6s ease-in-out infinite;
+}
+
+.gradient-text.shimmer {
+  background-image: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent1));
+}
+
+/* Keep the light-mode high-contrast navy gradient even when shimmering */
+[data-theme="light"] .gradient-text.shimmer {
+  background-image: linear-gradient(135deg, #0A0A2E 0%, #1e2d6e 50%, #0A0A2E 100%);
 }
 
 @keyframes gradientShift {
@@ -352,8 +363,7 @@ body.project-detail-open #mobile-nav-pill {
 
 /* ─── Respect reduced-motion preference for looping animations ─── */
 @media (prefers-reduced-motion: reduce) {
-  .gradient-text,
-  .gradient-text-green,
+  .shimmer,
   .float-animation {
     animation: none;
   }

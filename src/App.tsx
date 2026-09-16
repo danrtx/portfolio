@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { AppProvider } from './context/AppContext';
 import { Navbar } from './components/Navbar';
 import { IntroAnimation } from './components/IntroAnimation';
@@ -67,6 +68,7 @@ export default function App() {
       <AppProvider>
         <AppShell />
       </AppProvider>
+      <Analytics />
     </BrowserRouter>
   );
 }
