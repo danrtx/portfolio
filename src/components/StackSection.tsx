@@ -4,38 +4,57 @@ import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/AppContext';
 import { translations } from '../data/translations';
 
-const StackCard = ({ 
-  category, 
-  index, 
-  isOpen, 
-  onToggle 
-}: { 
-  category: any; 
-  index: number; 
-  isOpen: boolean; 
-  onToggle: () => void; 
+const StackCard = ({
+  category,
+  index,
+  isOpen,
+  onToggle
+}: {
+  category: any;
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
 }) => {
+  const [glare, setGlare] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setGlare({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+  };
+
   return (
     <motion.div
-      className="glass-card"
+      className="glass-card glare-host"
       onClick={onToggle}
+      onMouseMove={handleMouseMove}
       whileHover={{ y: -4 }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      style={{ cursor: 'pointer', overflow: 'hidden' }}
+      style={{ cursor: 'pointer', overflow: 'hidden', position: 'relative' }}
     >
+      {/* Ambient corner glow, tinted per category — echoes the profile card's decorative orbs */}
+      <div style={{ position: 'absolute', top: -30, right: -30, width: 130, height: 130, borderRadius: '50%', background: `radial-gradient(circle, ${category.color}22 0%, transparent 70%)`, pointerEvents: 'none' }} />
+      <div className="glare-layer" style={{ background: `radial-gradient(280px circle at ${glare.x}% ${glare.y}%, ${category.color}18, transparent 60%)` }} />
+
       {/* Card header — always visible */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '24px' }}>{category.icon}</span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: 14, flexShrink: 0,
+            background: 'var(--glass-bg)', border: `1px solid ${category.color}30`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+          }}>
+            {category.icon}
+          </div>
           <div>
             <h3 style={{ color: 'var(--text-primary)', fontSize: '15px', fontWeight: 600 }}>
               {category.title}
             </h3>
-            <span style={{ 
-              fontSize: '11px', 
+            <span style={{
+              fontSize: '11px',
               color: category.color,
               background: `${category.color}18`,
               padding: '2px 8px',

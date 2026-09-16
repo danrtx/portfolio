@@ -1,4 +1,4 @@
-import { Project, Skill } from '../types';
+import { Project, Skill, Testimonial } from '../types';
 
 // ─── Personal Info ──────────────────────────────────────────────────────────
 export const personal = {
@@ -178,6 +178,16 @@ export const certifications = [
     accent: '#34D399',
     icon: '🌐',
   },
+];
+
+// ─── Testimonials ────────────────────────────────────────────────────────────
+// Placeholder entries — name/quote text lives in translations.ts (testimonials_data)
+// and is intentionally instructional copy, not a real quote. Replace both the
+// data here and the matching translations_data entries with real testimonials
+// (e.g. LinkedIn recommendations) before relying on this section.
+export const testimonials: Testimonial[] = [
+  { id: 't1', company: 'Cambridge Academy of Languages', accent: '#4F8EF7', placeholder: true },
+  { id: 't2', company: 'Camp Michigania', accent: '#A78BFA', placeholder: true },
 ];
 
 // ─── Social Links ─────────────────────────────────────────────────────────────

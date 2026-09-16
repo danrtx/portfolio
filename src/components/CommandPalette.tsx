@@ -14,6 +14,7 @@ const SECTIONS: Section[] = [
   { id: 'work',       label: 'Work',         labelEs: 'Proyectos',   icon: '💼' },
   { id: 'experience', label: 'Experience',   labelEs: 'Experiencia', icon: '🚀' },
   { id: 'education',  label: 'Education',    labelEs: 'Educación',   icon: '🎓' },
+  { id: 'testimonials', label: 'Testimonials', labelEs: 'Testimonios', icon: '💬' },
   { id: 'contact',    label: 'Contact',      labelEs: 'Contacto',    icon: '✉️' },
 ];
 

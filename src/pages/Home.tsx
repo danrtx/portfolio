@@ -4,6 +4,7 @@ import { StackSection } from '../components/StackSection';
 import { ExperienceSection } from '../components/ExperienceSection';
 import { WorkSection } from '../components/WorkSection';
 import { EducationCertsSection } from '../components/EducationCertsSection';
+import { TestimonialsSection } from '../components/TestimonialsSection';
 import { ContactSection } from '../components/ContactSection';
 
 export function Home() {
@@ -15,6 +16,7 @@ export function Home() {
       <ExperienceSection />
       <WorkSection />
       <EducationCertsSection />
+      <TestimonialsSection />
       <ContactSection />
     </>
   );
