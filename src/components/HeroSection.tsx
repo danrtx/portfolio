@@ -1,12 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
-import { ParticleScene } from './ParticleScene';
 import { TerminalCard } from './TerminalCard';
 import { personal } from '../data/projects';
 import { useLanguage, useTheme } from '../context/AppContext';
 import { translations } from '../data/translations';
 import { useMagnetic } from '../hooks/useMagnetic';
+
+const ParticleScene = lazy(() => import('./ParticleScene').then((m) => ({ default: m.ParticleScene })));
 
 const letterVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -79,8 +80,12 @@ export function HeroSection() {
       style={{ height: '100vh', display: 'flex', alignItems: 'center' }}
       onMouseMove={handleMouseMove}
     >
-      {/* Three.js background */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}><ParticleScene /></div>
+      {/* Three.js background — code-split, it's decorative so a brief blank frame while it loads is fine */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <Suspense fallback={null}>
+          <ParticleScene />
+        </Suspense>
+      </div>
 
       {/* Radial gradient */}
       <div className="absolute inset-0 z-[1] pointer-events-none"
@@ -139,7 +144,7 @@ export function HeroSection() {
           <div style={{ display: 'flex', transform: `translate(${mousePos.x * 0.3}px, ${mousePos.y * 0.3}px)`, transition: 'transform 0.1s ease-out', width: '100%', overflow: 'visible', whiteSpace: 'nowrap' }}>
             {title.split('').map((letter, i) => (
               <motion.span key={i} custom={i} variants={letterVariants} initial="hidden" animate="visible"
-                className="gradient-text"
+                className="gradient-text shimmer"
                 style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2.2rem, 13vw, 5rem)', lineHeight: 1, display: 'inline-block', fontWeight: 800 }}>
                 {letter}
               </motion.span>

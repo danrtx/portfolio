@@ -105,7 +105,7 @@ export function IntroAnimation() {
               initial={{ opacity: 0, scale: 0.4, filter: 'blur(14px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="gradient-text"
+              className="gradient-text shimmer"
               style={letterStyle}
             >
               {FIRST}
@@ -119,7 +119,7 @@ export function IntroAnimation() {
                   variants={letterVariants}
                   initial="hidden"
                   animate="visible"
-                  className="gradient-text"
+                  className="gradient-text shimmer"
                   style={letterStyle}
                 >
                   {letter}
